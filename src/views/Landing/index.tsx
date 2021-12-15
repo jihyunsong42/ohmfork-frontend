@@ -15,7 +15,6 @@ import CloseIcon from './images/icon_24x24_close.svg';
 import Countdown from './components/Countdown';
 import WhiteList from '../WhiteList';
 
-//211215
 function Landing() {
   const [open, setOpen] = useState(false);
   return (
