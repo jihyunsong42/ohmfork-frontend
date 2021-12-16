@@ -15,15 +15,15 @@ function Root() {
     return window.location.host.includes('ido');
   };
 
-  if (isApp()) {
-    return (
-      <HashRouter>
-        <AppThemeProvider>
-          <App />
-        </AppThemeProvider>
-      </HashRouter>
-    );
-  }
+  // if (isApp()) {
+  return (
+    <HashRouter>
+      <AppThemeProvider>
+        <App />
+      </AppThemeProvider>
+    </HashRouter>
+  );
+  // }
   // return <ThemeProvider theme={lightTheme}>{<IDO />}</ThemeProvider>;
   return <ThemeProvider theme={lightTheme}>{<Landing />}</ThemeProvider>;
   // return <ThemeProvider theme={lightTheme}>{isIDO() ? <IDO /> : <Landing />}</ThemeProvider>;
