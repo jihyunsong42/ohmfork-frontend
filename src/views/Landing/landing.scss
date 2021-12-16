@@ -4,7 +4,7 @@
   background-color: #f7f9fb;
   display: flex;
   flex-direction: column;
-  color: #1d2654;
+  color: #020203;
 
   .whitelist-check {
     z-index: 10000;
@@ -103,7 +103,7 @@
       &__wave {
         width: 100%;
         height: 25px;
-        background-image: url(./images/wave_dark.svg);
+        // background-image: url(./images/wave_dark.svg);
         background-repeat: repeat-x;
         position: relative;
         z-index: 100;
