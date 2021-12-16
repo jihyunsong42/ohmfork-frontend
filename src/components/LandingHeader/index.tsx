@@ -33,7 +33,7 @@ export default function LandingHeader() {
 
   return (
     <header className={navbarClasses.join(' ')}>
-      <a href="https://www.otterclam.finance" className="landing-header-logo">
+      <a href="https://www.bibimbap.finance" className="landing-header-logo">
         <img src={HeaderLogo} alt="logo" />
       </a>
       <Link href={TwitterLink}>Twitter</Link>
