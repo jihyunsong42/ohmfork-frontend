@@ -45,9 +45,9 @@ export default function Footer({ backgroundColor }: Props) {
         <img src={XIcon} alt="x" style={{ width: 20, height: 20 }} />
         <img src={PolygonLogo} alt="logo" />
       </div>
-      <div className="contact-us">
+      {/* <div className="contact-us">
         <Link href="mailto:dev@otterclam.finance">Contact Us</Link>
-      </div>
+      </div> */}
     </footer>
   );
 }
