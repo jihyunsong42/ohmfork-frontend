@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import './header.scss';
 import { Link } from '@material-ui/core';
 import HeaderLogo from './header-logo.png';
-import { DiscordLink, TwitterLink } from 'src/constants';
+import { DiscordLink, TwitterLink, MediumLink } from 'src/constants';
 
 export default function LandingHeader() {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -33,13 +33,13 @@ export default function LandingHeader() {
 
   return (
     <header className={navbarClasses.join(' ')}>
-      <a href="https://www.otterclam.finance" className="landing-header-logo">
+      <a href="https://bibimbap.finance" className="landing-header-logo">
         <img src={HeaderLogo} alt="logo" />
       </a>
       <Link href={TwitterLink}>Twitter</Link>
       <Link href={DiscordLink}>Discord</Link>
-      {/* <Link href={GithubLink}>Github</Link>
-      <Link href={MediumLink}>Medium</Link> */}
+      {/* <Link href={GithubLink}>Github</Link> */}
+      <Link href={MediumLink}>Medium</Link>
       {/* <Link href={DocsLink}>Docs</Link> */}
       {/* <div className="landing-header-nav-wrap">
         <Box

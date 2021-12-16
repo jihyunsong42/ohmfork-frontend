@@ -31,14 +31,15 @@ export interface Props {
 export default function Footer({ backgroundColor }: Props) {
   return (
     <footer className={styles.footer} style={{ backgroundColor }}>
-      <h2 className={styles.title}>Join Our Community</h2>
+      {/* <h2 className={styles.title}>Join Our Community</h2> */}
+      <h2 className={styles.title}>Coming Soon</h2>
       <div className={styles.buttonList}>
         <LinkButton name="Twitter" href={TwitterLink} image={TwitterIcon} />
         <LinkButton name="Discord" href={DiscordLink} image={DiscordIcon} />
-        <LinkButton name="Github" href={GithubLink} image={GithubIcon} />
-        <LinkButton name="Docs" href={DocsLink} image={DocIcon} />
+        {/* <LinkButton name="Github" href={GithubLink} image={GithubIcon} /> */}
+        {/* <LinkButton name="Docs" href={DocsLink} image={DocIcon} /> */}
       </div>
-      <p className={styles.makeit}>Let's make it (🦦,🦦)</p>
+      <p className={styles.makeit}>WAGMI with (비빔,비빔)</p>
       <div className={styles.logos}>
         <img src={HeaderLogo} alt="logo" />
         <img src={XIcon} alt="x" style={{ width: 20, height: 20 }} />

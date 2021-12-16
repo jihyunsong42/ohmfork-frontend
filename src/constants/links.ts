@@ -6,4 +6,4 @@ export const DocsLink = 'https://docs.otterclam.finance';
 
 export const GithubLink = 'https://github.com/OtterClam';
 
-export const MediumLink = 'https://otterclam.medium.com/';
+export const MediumLink = 'https://medium.com/@bibimbap.dao';
