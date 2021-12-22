@@ -12,8 +12,6 @@ function BondHeader({ bond }: IBondHeaderProps) {
       return getTokenImage('clam');
     } else if (bond.key.indexOf('mai') >= 0) {
       return getTokenImage('mai');
-    } else if (bond.key.indexOf('frax') >= 0) {
-      return getTokenImage('frax', 32);
     }
   };
 

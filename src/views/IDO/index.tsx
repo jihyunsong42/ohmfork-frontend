@@ -147,8 +147,6 @@ export default function IDO() {
       setMaiBalance(balance);
     } else setMaiBalance('0');
 
-    setLoading(false);
-
     dispatch({
       type: 'load-details-complete',
       walletMAIBalance,
@@ -162,6 +160,8 @@ export default function IDO() {
       finalized,
       totalRaised,
     });
+
+    setLoading(false);
   }, [wallet, provider, connected]);
 
   const approve = useCallback(async () => {

@@ -174,7 +174,7 @@ function NavContent() {
                       </Link>
                     ))}
                   </div>
-                  {/* <div className="bond-discounts-group">
+                  <div className="bond-discounts-group">
                     <div className="bond-discounts-group-title bond">
                       <span>Deprecated</span>
                     </div>
@@ -183,7 +183,7 @@ function NavContent() {
                         {bond.discount == NaN ? <Skeleton variant="text" width={'150px'} /> : <p>{bond.name}</p>}
                       </Link>
                     ))}
-                  </div> */}
+                  </div>
                 </div>
               </div>
 

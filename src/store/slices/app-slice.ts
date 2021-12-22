@@ -63,7 +63,7 @@ export const loadAppDetails = createAsyncThunk(
       provider,
     );
     const stakingContract = new ethers.Contract(addresses.STAKING_ADDRESS, StakingContract, provider);
-
+    console.log('0');
     let reserveAmount = (
       await Promise.all(
         ReserveKeys.map(async key => {
@@ -77,15 +77,24 @@ export const loadAppDetails = createAsyncThunk(
       )
     ).reduce((prev, value) => prev + value);
 
+    console.log('reserveAmount: ' + reserveAmount);
+
     const lp = contractForReserve('mai_clam', networkID, provider);
     const maiClamAmount = await lp.balanceOf(addresses.TREASURY_ADDRESS);
     const valuation = await bondCalculator.valuation(addressForReserve('mai_clam', networkID), maiClamAmount);
     const markdown = await bondCalculator.markdown(addressForReserve('mai_clam', networkID));
+    console.log('valuation : ' + valuation / 1e9);
+    console.log('markdown : ' + markdown / 1e18);
+
     const maiClamUSD = (valuation / 1e9) * (markdown / 1e18);
     const [rfvLPValue, pol] = await getDiscountedPairUSD(maiClamAmount, networkID, provider);
 
+    console.log('maiClamUSD: ' + maiClamUSD);
+
     const treasuryBalance = reserveAmount + maiClamUSD;
     const treasuryRiskFreeValue = reserveAmount + rfvLPValue;
+
+    console.log('treasuryBalance : ' + treasuryBalance);
 
     const stakingBalance = await stakingContract.contractBalance();
     const circSupply = (await clamCirculatingSupply.CLAMCirculatingSupply()) / 1e9;
@@ -98,7 +107,7 @@ export const loadAppDetails = createAsyncThunk(
     const stakingAPY = Math.pow(1 + stakingRebase, 365 * 3) - 1;
     const stakingRatio = sClamCirc / circSupply;
     const backingPerClam = treasuryBalance / circSupply;
-
+    console.log('3');
     const currentIndex = await stakingContract.index();
     const nextRebase = epoch.endTime.toNumber();
 
@@ -112,22 +121,22 @@ export const loadAppDetails = createAsyncThunk(
     const treasuryRunway = Math.log(treasuryRiskFreeValue / sClamCirc) / Math.log(1 + stakingRebase) / 3;
 
     return {
-      currentIndex: ethers.utils.formatUnits(currentIndex, 'gwei'),
+      currentIndex: ethers.utils.formatUnits(currentIndex, 'gwei'), // Current Index
       totalSupply,
       circSupply,
-      marketCap,
+      marketCap, // Market Cap
       currentBlock,
       fiveDayRate,
-      treasuryBalance,
-      stakingAPY,
-      stakingTVL,
+      treasuryBalance, // Treasury Balance
+      stakingAPY, // Staking APY
+      stakingTVL, // Staking TVL
       stakingRebase,
-      marketPrice,
+      marketPrice, // CLAM Price
       currentBlockTime,
       nextRebase,
-      stakingRatio,
-      backingPerClam,
-      treasuryRunway,
+      stakingRatio, // Staking Ratio
+      backingPerClam, // Backing Per CLAM
+      treasuryRunway, // Runway
       pol,
     };
   },
