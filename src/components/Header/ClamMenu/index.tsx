@@ -49,7 +49,7 @@ function ClamMenu() {
 
   const addresses = getAddresses(networkID);
 
-  const { CLAM_ADDRESS, sCLAM_ADDRESS } = addresses;
+  const { BBB_ADDRESS, sBBB_ADDRESS } = addresses;
 
   const handleClick = (event: any) => {
     setAnchorEl(anchorEl ? null : event.currentTarget);
@@ -66,7 +66,7 @@ function ClamMenu() {
         id="ohm-menu-button-hover"
       >
         <Box borderColor="#C74B26" className="ohm-button">
-          <p style={{ color: '#C74B26' }}>BUY CLAM2</p>
+          <p style={{ color: '#C74B26' }}>BUY BBB</p>
         </Box>
 
         <Popper id={id} open={open} anchorEl={anchorEl} transition>
@@ -76,7 +76,7 @@ function ClamMenu() {
                 <Paper className={`${styles.popperMenu} ohm-menu`} elevation={1}>
                   <Box component="div" className="buy-tokens">
                     <Link
-                      href={'https://quickswap.exchange/#/swap?outputCurrency=' + CLAM_ADDRESS}
+                      href={'https://quickswap.exchange/#/swap?outputCurrency=' + BBB_ADDRESS}
                       target="_blank"
                       rel="noreferrer"
                     >
@@ -96,17 +96,17 @@ function ClamMenu() {
                         size="large"
                         variant="text"
                         color="primary"
-                        onClick={addTokenToWallet('CLAM2', CLAM_ADDRESS)}
+                        onClick={addTokenToWallet('BBB', BBB_ADDRESS)}
                       >
-                        <Typography className="buy-text">CLAM2</Typography>
+                        <Typography className="buy-text">BBB</Typography>
                       </Button>
                       <Button
                         variant="text"
                         size="large"
                         color="primary"
-                        onClick={addTokenToWallet('sCLAM2', sCLAM_ADDRESS)}
+                        onClick={addTokenToWallet('sBBB', sBBB_ADDRESS)}
                       >
-                        <Typography className="buy-text">sCLAM2</Typography>
+                        <Typography className="buy-text">sBBB</Typography>
                       </Button>
                     </Box>
                   ) : null}

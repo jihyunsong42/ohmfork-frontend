@@ -179,8 +179,8 @@ function BondPurchase({ bondKey, slippage }: IBondPurchaseProps) {
         {hasAllowance() ? (
           <Box
             className="transaction-button app-otter-button"
-            bgcolor="otter.otterBlue"
-            color="otter.white"
+            bgcolor="bibimbap.bibimbapBrown"
+            color="bibimbap.white"
             onClick={async () => {
               if (isPendingTxn(pendingTransactions, 'bond_' + bond)) return;
               await onBond();
@@ -191,8 +191,8 @@ function BondPurchase({ bondKey, slippage }: IBondPurchaseProps) {
         ) : (
           <Box
             className="transaction-button app-otter-button"
-            bgcolor="otter.otterBlue"
-            color="otter.white"
+            bgcolor="bibimbap.bibimbapBrown"
+            color="bibimbap.white"
             onClick={async () => {
               if (isPendingTxn(pendingTransactions, 'approve_' + bond)) return;
               await onSeekApproval();

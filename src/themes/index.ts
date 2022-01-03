@@ -2,9 +2,9 @@ import { createTheme, responsiveFontSizes } from '@material-ui/core/styles';
 import commonSettings from './global';
 
 const colors = {
-  otterDark: '#020203',
-  otterBlue: '#3B4BD8',
-  otterBlueHover: '#303FC7',
+  bibimbapDark: '#020203',
+  bibimbapBrown: '#c74b26',
+  bibimbapBrownHover: '#c73a05',
   darkGray200: '#5E6E99',
   darkGray300: '#434E77',
   clamPink: '#FF6854',
@@ -27,8 +27,8 @@ const lightTheme = {
   activeLinkColor: '#222222',
   activeLinkSvgColor: 'invert(64%) sepia(11%) saturate(934%) hue-rotate(157deg) brightness(90%) contrast(86%)',
   primaryButtonColor: '#fff',
-  primaryButtonBG: colors.otterBlue,
-  primaryButtonHoverBG: colors.otterBlueHover,
+  primaryButtonBG: colors.bibimbapBrown,
+  primaryButtonHoverBG: colors.bibimbapBrownHover,
   // these need fixing
   primaryButtonHoverColor: '#fff',
   secondaryButtonHoverBG: '#fff',
@@ -139,7 +139,7 @@ export const light = responsiveFontSizes(
             color: lightTheme.color,
           },
           head: {
-            color: colors.otterDark,
+            color: colors.bibimbapDark,
           },
         },
         MuiInputBase: {
@@ -164,7 +164,7 @@ export const light = responsiveFontSizes(
           textColorPrimary: {
             color: colors.darkGray200,
             '&:selected': {
-              color: colors.otterDark,
+              color: colors.bibimbapDark,
             },
           },
         },
@@ -246,8 +246,8 @@ export const light = responsiveFontSizes(
             },
           },
           outlinedPrimary: {
-            color: colors.otterDark,
-            borderColor: colors.otterDark,
+            color: colors.bibimbapDark,
+            borderColor: colors.bibimbapDark,
             backgroundColor: 'fff',
             '&:hover': {
               color: `${colors.darkGray300} !important`,
@@ -255,8 +255,8 @@ export const light = responsiveFontSizes(
               backgroundColor: 'fff',
             },
             '@media (hover:none)': {
-              color: colors.otterDark,
-              borderColor: colors.otterDark,
+              color: colors.bibimbapDark,
+              borderColor: colors.bibimbapDark,
               backgroundColor: 'fff',
               '&:hover': {
                 backgroundColor: 'fff',

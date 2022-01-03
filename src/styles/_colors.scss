@@ -1,6 +1,4 @@
-$otter-dark: #020203;
-$otter-blue: #3b4bd8;
-$otter-blue-hover: #303fc7;
+$bibimbap-dark: #020203;
 $light-gray100: #f7f9fb;
 $light-gray200: #e9f0f3;
 $light-gray300: #dbe6ec;
@@ -8,10 +6,12 @@ $light-gray400: #ccd4e0;
 $clam-pink: #ff6854;
 $dark-grey: #434e77;
 $dark-gray300: #434e77;
+$bibimbap-brown: #c74b26;
+$bibimbap-brown-hover: #c73a05;
 
 :export {
-  otterDark: $otter-dark;
-  otterBlue: $otter-blue;
+  bibimbapBrown: $bibimbap-brown;
+  bibimbapDark: $bibimbap-dark;
   lightGray100: $light-gray100;
   lightGray200: $light-gray200;
   lightGray300: $light-gray300;

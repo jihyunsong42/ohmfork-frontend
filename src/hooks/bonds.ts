@@ -24,6 +24,7 @@ export const makeBondsArray = (bondings: IBond, chainId: number) => {
 export const useBonds = () => {
   const { chainID } = useWeb3Context();
   const bondings = useSelector<IReduxState, IBond>(state => state.bonding);
+  console.log(bondings);
   const [bonds, setBonds] = useState(makeBondsArray(bondings, chainID));
 
   useEffect(() => {

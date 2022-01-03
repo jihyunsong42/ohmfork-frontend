@@ -184,7 +184,7 @@
   text-align: center;
 
   &:hover {
-    background: $otter-blue-hover;
+    background: $bibimbap-brown-hover;
   }
 
   p {
@@ -199,7 +199,7 @@
   align-items: center;
   justify-content: center;
   background: $light-gray100;
-  color: $otter-dark;
+  color: $bibimbap-dark;
   height: 41px;
   border-radius: 10px;
   text-align: center;
@@ -234,7 +234,7 @@
       height: 24px;
       background-color: $light-gray200;
       border-radius: 12px;
-      color: $otter-dark;
+      color: $bibimbap-dark;
     }
     .data-row-title {
       flex: 1;
@@ -250,7 +250,7 @@
     }
 
     .estimated-clam2 {
-      color: $otter-blue;
+      color: $bibimbap-brown;
       font-size: 14px;
       font-weight: 500;
     }

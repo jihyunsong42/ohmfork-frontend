@@ -39,11 +39,11 @@ function ChooseBond() {
         <Paper className="ohm-card">
           <Box className="card-header">
             <p className="bond-title">
-              Bond (
-              <span className="bond-title-span">
+              Bond (비빔, 비빔)
+              {/* <span className="bond-title-span">
                 {getTokenImage('clam', 24)},{getTokenImage('clam', 24)}
               </span>
-              )
+              ) */}
             </p>
           </Box>
 

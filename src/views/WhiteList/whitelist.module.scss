@@ -8,7 +8,7 @@
 }
 
 .title {
-  color: $otter-dark;
+  color: $bibimbap-dark;
   text-align: center;
   margin: 0;
   margin-top: 20px;
@@ -47,12 +47,12 @@
 }
 
 .desc {
-  color: $otter-dark;
+  color: $bibimbap-dark;
   font-size: 24px;
   margin-top: 20px;
   text-align: center;
   span {
-    color: $otter-blue;
+    color: $bibimbap-brown;
   }
 
   @media screen and (max-width: 596px) {
@@ -67,11 +67,10 @@
 .whitelistedTitle {
   display: flex;
   align-items: center;
-  color: $otter-dark;
+  color: $bibimbap-dark;
   @media screen and (max-width: 596px) {
     font-size: 36px;
   }
-
 
   img {
     width: 32px;

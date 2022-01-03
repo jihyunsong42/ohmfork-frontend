@@ -47,15 +47,14 @@ export const loadAppDetails = createAsyncThunk(
   'app/loadAppDetails',
   //@ts-ignore
   async ({ networkID, provider }: ILoadAppDetails) => {
-    console.log('network ID : ' + networkID);
     const maiPrice = await getTokenPrice('MAI');
 
     const addresses = getAddresses(networkID);
     const currentBlock = await provider.getBlockNumber();
     const currentBlockTime = (await provider.getBlock(currentBlock)).timestamp;
 
-    const clamContract = new ethers.Contract(addresses.CLAM_ADDRESS, ClamTokenContract, provider);
-    const sCLAMContract = new ethers.Contract(addresses.sCLAM_ADDRESS, StakedClamContract, provider);
+    const clamContract = new ethers.Contract(addresses.BBB_ADDRESS, ClamTokenContract, provider);
+    const sCLAMContract = new ethers.Contract(addresses.sBBB_ADDRESS, StakedClamContract, provider);
     const bondCalculator = new ethers.Contract(addresses.CLAM_BONDING_CALC_ADDRESS, BondingCalcContract, provider);
     const clamCirculatingSupply = new ethers.Contract(
       addresses.CLAM_CIRCULATING_SUPPLY,
@@ -63,38 +62,27 @@ export const loadAppDetails = createAsyncThunk(
       provider,
     );
     const stakingContract = new ethers.Contract(addresses.STAKING_ADDRESS, StakingContract, provider);
-    console.log('0');
+
     let reserveAmount = (
       await Promise.all(
         ReserveKeys.map(async key => {
           const token = contractForReserve(key, networkID, provider);
           const balance = await token.balanceOf(addresses.TREASURY_ADDRESS);
-          console.log('key : ' + key);
-          console.log('treasury: ' + addresses.TREASURY_ADDRESS);
-          console.log('balance : ' + balance);
           return balance / 1e18;
         }),
       )
     ).reduce((prev, value) => prev + value);
 
-    console.log('reserveAmount: ' + reserveAmount);
-
     const lp = contractForReserve('mai_clam', networkID, provider);
     const maiClamAmount = await lp.balanceOf(addresses.TREASURY_ADDRESS);
     const valuation = await bondCalculator.valuation(addressForReserve('mai_clam', networkID), maiClamAmount);
     const markdown = await bondCalculator.markdown(addressForReserve('mai_clam', networkID));
-    console.log('valuation : ' + valuation / 1e9);
-    console.log('markdown : ' + markdown / 1e18);
 
     const maiClamUSD = (valuation / 1e9) * (markdown / 1e18);
     const [rfvLPValue, pol] = await getDiscountedPairUSD(maiClamAmount, networkID, provider);
 
-    console.log('maiClamUSD: ' + maiClamUSD);
-
     const treasuryBalance = reserveAmount + maiClamUSD;
     const treasuryRiskFreeValue = reserveAmount + rfvLPValue;
-
-    console.log('treasuryBalance : ' + treasuryBalance);
 
     const stakingBalance = await stakingContract.contractBalance();
     const circSupply = (await clamCirculatingSupply.CLAMCirculatingSupply()) / 1e9;
@@ -105,17 +93,21 @@ export const loadAppDetails = createAsyncThunk(
     const stakingRebase = stakingReward / sClamCirc;
     const fiveDayRate = Math.pow(1 + stakingRebase, 5 * 3) - 1;
     const stakingAPY = Math.pow(1 + stakingRebase, 365 * 3) - 1;
+    console.log('epoch : ');
+    console.log(epoch);
+    console.log('staking Reward : ' + stakingReward);
+    console.log('sClamCirc : ' + sClamCirc);
+    console.log('staking Rebase = stakingReward(' + stakingReward + ') / sClamCirc(' + sClamCirc + ').');
+    console.log('staking Reward = epoch.distribute' + epoch.distribute / 1e9);
+    console.log('staking APY : ' + stakingAPY);
     const stakingRatio = sClamCirc / circSupply;
     const backingPerClam = treasuryBalance / circSupply;
-    console.log('3');
     const currentIndex = await stakingContract.index();
     const nextRebase = epoch.endTime.toNumber();
 
     const rawMarketPrice = await getMarketPrice(networkID, provider);
     const marketPrice = Number(((rawMarketPrice.toNumber() / 1e9) * maiPrice).toFixed(2));
     const stakingTVL = (stakingBalance * marketPrice) / 1e9;
-    console.log('circSupply : ' + circSupply);
-    console.log('marketPrice : ' + marketPrice);
     const marketCap = circSupply * marketPrice;
 
     const treasuryRunway = Math.log(treasuryRiskFreeValue / sClamCirc) / Math.log(1 + stakingRebase) / 3;
@@ -152,7 +144,7 @@ async function getDiscountedPairUSD(
   const total_lp = await pair.totalSupply();
   const reserves = await pair.getReserves();
   const address = getAddresses(networkID);
-  const [clam, mai] = BigNumber.from(address.MAI_ADDRESS).gt(address.CLAM_ADDRESS)
+  const [clam, mai] = BigNumber.from(address.MAI_ADDRESS).gt(address.BBB_ADDRESS)
     ? [reserves[0], reserves[1]]
     : [reserves[1], reserves[0]];
   const lp_token_1 = clam / 1e9;

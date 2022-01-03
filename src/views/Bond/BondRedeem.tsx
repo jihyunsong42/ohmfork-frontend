@@ -61,8 +61,8 @@ function BondRedeem({ bondKey }: IBondRedeem) {
       <Box display="flex" justifyContent="space-around" flexWrap="wrap">
         <Box
           className="transaction-button app-otter-button"
-          bgcolor="otter.otterBlue"
-          color="otter.white"
+          bgcolor="bibimbap.bibimbapBrown"
+          color="bibimbap.white"
           onClick={() => {
             if (bond.autostake && !fullVested) {
               window.alert('You can only claim (4,4) bond after it fully vested.');
@@ -77,8 +77,8 @@ function BondRedeem({ bondKey }: IBondRedeem) {
         {!bond.deprecated && !bond.autostake && (
           <Box
             className="transaction-button app-otter-button"
-            bgcolor="otter.otterBlue"
-            color="otter.white"
+            bgcolor="bibimbap.bibimbapBrown"
+            color="bibimbap.white"
             onClick={() => {
               if (isPendingTxn(pendingTransactions, 'redeem_bond_' + bondKey + '_autostake')) return;
               onRedeem(true);

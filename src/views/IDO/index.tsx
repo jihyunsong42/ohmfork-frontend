@@ -8,7 +8,7 @@ import { useWeb3Context } from 'src/hooks';
 import { MediumLink } from '../../constants';
 import tokenIcon from '../IDO/images/icon_token.svg';
 import maiIcon from '../IDO/images/mai-icon.png';
-import happyOtter from '../IDO/images/otter_happy.png';
+import happyBibim from '../IDO/images/otter_happy.png';
 import Countdown from '../Landing/components/Countdown';
 import Footer from '../Landing/components/Footer';
 import styles from './ido.module.scss';
@@ -120,6 +120,7 @@ export default function IDO() {
   const staking = new ethers.Contract(addresses.STAKING_ADDRESS, StakingContract, provider);
 
   const loadDetails = useCallback(async () => {
+    console.log('connected: ' + connected);
     setLoading(true);
     const idoMAIAmount = ethers.utils.formatEther(await mai.balanceOf(ido.address));
     let walletMAIBalance = connected ? await mai.balanceOf(wallet) : BigNumber.from(0);
@@ -138,9 +139,7 @@ export default function IDO() {
     const totalRaised = Number(ethers.utils.formatUnits(await mai.balanceOf(addresses.IDO), 18)).toLocaleString(
       'en-US',
     );
-    console.log('sale price : ' + Number(ethers.utils.formatUnits(await ido.salePrice(), 18)));
     setSalePrice(ethers.utils.formatUnits(await ido.salePrice(), 18));
-    console.log(totalRaised);
 
     if (connected) {
       const balance = ethers.utils.formatUnits(await mai.connect(provider.getSigner()).balanceOf(wallet));
@@ -160,7 +159,6 @@ export default function IDO() {
       finalized,
       totalRaised,
     });
-
     setLoading(false);
   }, [wallet, provider, connected]);
 
@@ -209,10 +207,6 @@ export default function IDO() {
       dispatch({ type: 'purchased' });
     }
   }, [provider, ido]);
-
-  useEffect(() => {
-    loadDetails();
-  }, [connected]);
 
   useEffect(() => {
     loadDetails();
@@ -318,13 +312,14 @@ export default function IDO() {
       <div className={styles.hero_section}>
         <h1 className={styles.title}>Claim your BBB</h1>
         <p className={styles.desc}>
-          The IDO will be held from Dec 17, 2021 0:00 UTC to Nov 2, 2021 23:59 UTC. Join the Bibimbap Land now!🦦
+          The IDO will be held from Dec 17, 2021 0:00 UTC to Nov 2, 2021 23:59 UTC. Join the Bibimbap Land now! (비빔,
+          비빔)
         </p>
       </div>
       <Countdown />
       <div className={styles.mainBox}>
-        <div className={styles.happyOtterBox}>
-          <img src={happyOtter} className={styles.happyOtter} />
+        <div className={styles.happyBibimBox}>
+          <img src={happyBibim} className={styles.happyBibim} />
         </div>
 
         <div className={styles.currentMaiBox}>
@@ -337,7 +332,7 @@ export default function IDO() {
       <div className={styles.claimClamBox}>
         {connected ? (
           <div className={styles.connectedBox}>
-            {loading ? (
+            {loading || !state.connected ? (
               <p className={styles.soldOut}>loading...</p>
             ) : !state.whitelisted ? (
               <p className={styles.soldOut}>Sorry, you are not in whitelist!</p>

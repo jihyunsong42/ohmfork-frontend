@@ -59,7 +59,7 @@ function ConnectMenu() {
       <Box
         className="connect-button"
         bgcolor="#C74B26"
-        color="otter.white"
+        color="bibimbap.white"
         onMouseOver={() => setIsHovering(true)}
         onMouseLeave={() => setIsHovering(false)}
         onClick={clickFunc}

@@ -79,7 +79,7 @@ function NavContent() {
     return (state.app && state.app.networkID) || DEFAULT_NETWORK;
   });
   const addresses = getAddresses(networkID);
-  const { CLAM_ADDRESS } = addresses;
+  const { BBB_ADDRESS } = addresses;
 
   const checkPage = useCallback((location: any, page: Page): boolean => {
     const currentPath = location.pathname.replace('/', '');
@@ -96,7 +96,7 @@ function NavContent() {
     <Paper className="dapp-sidebar">
       <Box className="dapp-sidebar" display="flex" justifyContent="space-between" flexDirection="column">
         <div className="dapp-menu-top">
-          <Link href="https://www.otterclam.finance" target="_blank">
+          <Link href="https://bibimbap.finance" target="_blank">
             <Box display="flex" flexDirection="column" className="branding-header">
               <AppLogo />
               <Box mt="10px" />
@@ -188,17 +188,17 @@ function NavContent() {
               </div>
 
               <Link
-                href={'https://quickswap.exchange/#/swap?outputCurrency=' + CLAM_ADDRESS}
+                href={'https://app.sushi.com/swap?outputCurrency=' + BBB_ADDRESS}
                 target="_blank"
                 rel="noreferrer"
                 className="button-dapp-menu"
               >
                 <div className="dapp-menu-item">
                   <InactiveMenuIcon />
-                  <p>Buy CLAM2</p>
+                  <p>Buy BBB</p>
                 </div>
               </Link>
-              <Link
+              {/* <Link
                 component={NavLink}
                 id="migrate-nav"
                 to="/migrate"
@@ -212,7 +212,7 @@ function NavContent() {
                   {checkPage(location, 'migrate') ? <ActiveMenuIcon /> : <InactiveMenuIcon />}
                   <p>Migrate</p>
                 </div>
-              </Link>
+              </Link> */}
             </div>
           </div>
         </div>
@@ -223,7 +223,7 @@ function NavContent() {
                 <Box
                   className="light-dark-toggle"
                   component="button"
-                  bgcolor="otter.otterBlue"
+                  bgcolor="bibimbap.bibimbapBrown"
                   display="flex"
                   justifyContent="center"
                   alignItems="center"
@@ -242,7 +242,7 @@ function NavContent() {
                 <Box
                   className="light-dark-toggle"
                   component="button"
-                  bgcolor="otter.white"
+                  bgcolor="bibimbap.white"
                   display="flex"
                   justifyContent="center"
                   alignItems="center"

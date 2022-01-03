@@ -23,8 +23,8 @@ export const changeApproval = createAsyncThunk(
     const addresses = getAddresses(networkID);
 
     const signer = provider.getSigner();
-    const clamContract = new ethers.Contract(addresses.CLAM_ADDRESS, ClamTokenContract, signer);
-    const sCLAMContract = new ethers.Contract(addresses.sCLAM_ADDRESS, StakedClamContract, signer);
+    const clamContract = new ethers.Contract(addresses.BBB_ADDRESS, ClamTokenContract, signer);
+    const sCLAMContract = new ethers.Contract(addresses.sBBB_ADDRESS, StakedClamContract, signer);
 
     let approveTx;
     try {

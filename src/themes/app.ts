@@ -5,13 +5,13 @@ const colorPalette = {
   common: {
     clamPink: '#FF6854',
     clamPinkHover: '#F5523C',
-    otterBlue: '#3B4BD8',
     otterBlueHover: '#303FC7',
+    bibimbapBrown: '#c74b26',
     otterGreen: '#38D076',
     white: '#FFFFFF',
   },
   light: {
-    otterDark: '#1D2654',
+    bibimbapDark: '#1D2654',
     white: '#FFFFFF',
     lightGray100: '#F7F9FB',
     lightGray200: '#E9F0F3',
@@ -32,7 +32,7 @@ const colorPalette = {
     },
   },
   dark: {
-    otterDark: '#F7F9FB',
+    bibimbapDark: '#F7F9FB',
     white: '#0A0E23',
     lightGray100: '#101631',
     lightGray200: '#212B4F',
@@ -56,17 +56,17 @@ const colorPalette = {
 
 declare module '@material-ui/core/styles/createPalette' {
   interface Palette {
-    otter: typeof colorPalette['common'];
+    bibimbap: typeof colorPalette['common'];
     mode: typeof colorPalette['light'];
   }
   interface PaletteOptions {
-    otter: typeof colorPalette['common'];
+    bibimbap: typeof colorPalette['common'];
     mode: typeof colorPalette['light'];
   }
 }
 
 export interface Theme extends MuiTheme {
-  otter: typeof colorPalette['common'];
+  bibimbap: typeof colorPalette['common'];
 }
 
 export const light = responsiveFontSizes(
@@ -74,10 +74,10 @@ export const light = responsiveFontSizes(
     {
       palette: {
         type: 'light',
-        otter: colorPalette.common,
+        bibimbap: colorPalette.common,
         mode: colorPalette.light,
         primary: {
-          main: colorPalette.light.otterDark,
+          main: colorPalette.light.bibimbapDark,
         },
         secondary: {
           main: colorPalette.light.darkGray200,
@@ -87,7 +87,7 @@ export const light = responsiveFontSizes(
           paper: colorPalette.light.white,
         },
         text: {
-          primary: colorPalette.light.otterDark,
+          primary: colorPalette.light.bibimbapDark,
           secondary: colorPalette.common.clamPink,
           hint: colorPalette.common.white,
           disabled: colorPalette.light.darkGray200,
@@ -103,10 +103,10 @@ export const dark = responsiveFontSizes(
     {
       palette: {
         type: 'dark',
-        otter: colorPalette.common,
+        bibimbap: colorPalette.common,
         mode: colorPalette.dark,
         primary: {
-          main: colorPalette.dark.otterDark,
+          main: colorPalette.dark.bibimbapDark,
         },
         secondary: {
           main: colorPalette.dark.darkGray200,
@@ -116,7 +116,7 @@ export const dark = responsiveFontSizes(
           paper: colorPalette.dark.white,
         },
         text: {
-          primary: colorPalette.dark.otterDark,
+          primary: colorPalette.dark.bibimbapDark,
           secondary: colorPalette.common.clamPink,
           hint: colorPalette.common.white,
           disabled: colorPalette.dark.darkGray200,

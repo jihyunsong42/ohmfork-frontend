@@ -40,7 +40,7 @@ export function BondDataCard({ bondKey }: IBondProps) {
             {!bond.deprecated && (
               <div>
                 <Link href={bond.dexUrl} target="_blank">
-                  <Box component="p" color="otter.otterBlue" className="bond-lp-add-liquidity">
+                  <Box component="p" color="bibimbap.bibimbapBrown" className="bond-lp-add-liquidity">
                     {bond.type === 'lp' ? 'Add Liquidity' : `Buy ${bond.reserveUnit}`}
                   </Box>
                 </Link>
@@ -90,8 +90,8 @@ export function BondDataCard({ bondKey }: IBondProps) {
         </div>
         <Link component={NavLink} to={`/bonds/${bondKey}`}>
           <Box
-            bgcolor="otter.otterBlue"
-            color="otter.white"
+            bgcolor="bibimbap.bibimbapBrown"
+            color="bibimbap.white"
             display="flex"
             justifyContent="center"
             alignItems="center"
@@ -141,7 +141,7 @@ export function BondTableRow({ bondKey }: IBondProps) {
             <p className="bond-name-title">{bond.name}</p>
             {!bond.deprecated && (
               <Link color="primary" href={bond.dexUrl} target="_blank">
-                <Box component="p" color="otter.otterBlue" className="bond-lp-add-liquidity">
+                <Box component="p" color="bibimbap.bibimbapBrown" className="bond-lp-add-liquidity">
                   {bond.type === 'lp' ? 'Add Liquidity' : `Buy ${bond.reserveUnit}`}
                 </Box>
               </Link>
@@ -194,8 +194,8 @@ export function BondTableRow({ bondKey }: IBondProps) {
           {!bond.deprecated && (
             <Link className="bond-table-action-button" component={NavLink} to={`/bonds/${bondKey}?action=bond`}>
               <Box
-                bgcolor="otter.otterBlue"
-                color="otter.white"
+                bgcolor="bibimbap.bibimbapBrown"
+                color="bibimbap.white"
                 display="flex"
                 justifyContent="center"
                 alignItems="center"
@@ -208,7 +208,7 @@ export function BondTableRow({ bondKey }: IBondProps) {
           )}
           <Link className="bond-table-action-button" component={NavLink} to={`/bonds/${bondKey}?action=redeem`}>
             <Box
-              color="otter.otterBlue"
+              color="bibimbap.bibimbapBrown"
               display="flex"
               justifyContent="center"
               alignItems="center"

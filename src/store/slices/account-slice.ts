@@ -49,9 +49,9 @@ export const getBalances = createAsyncThunk(
   'account/getBalances',
   async ({ address, networkID, provider }: IAccountProps) => {
     const addresses = getAddresses(networkID);
-    const sClamContract = new ethers.Contract(addresses.sCLAM_ADDRESS, StakedClamContract, provider);
+    const sClamContract = new ethers.Contract(addresses.sBBB_ADDRESS, StakedClamContract, provider);
     const sClamBalance = await sClamContract.balanceOf(address);
-    const clamContract = new ethers.Contract(addresses.CLAM_ADDRESS, ClamTokenContract, provider);
+    const clamContract = new ethers.Contract(addresses.BBB_ADDRESS, ClamTokenContract, provider);
     const clamBalance = await clamContract.balanceOf(address);
     return {
       balances: {
@@ -68,8 +68,8 @@ export const loadAccountDetails = createAsyncThunk(
     const addresses = getAddresses(networkID);
 
     const maiContract = new ethers.Contract(addresses.MAI_ADDRESS, MAIContract, provider);
-    const clamContract = new ethers.Contract(addresses.CLAM_ADDRESS, ClamTokenContract, provider);
-    const sClamContract = new ethers.Contract(addresses.sCLAM_ADDRESS, StakedClamContract, provider);
+    const clamContract = new ethers.Contract(addresses.BBB_ADDRESS, ClamTokenContract, provider);
+    const sClamContract = new ethers.Contract(addresses.sBBB_ADDRESS, StakedClamContract, provider);
     const stakingContract = new ethers.Contract(addresses.STAKING_ADDRESS, StakingContract, provider);
 
     const [maiBalance, clamBalance, stakeAllowance, sClamBalance, unstakeAllowance, warmup, epoch] = await Promise.all([
@@ -84,6 +84,18 @@ export const loadAccountDetails = createAsyncThunk(
 
     const gons = warmup[1];
     const warmupBalance = await sClamContract.balanceForGons(gons);
+
+    console.log('hh');
+    console.log(warmup);
+    console.log(epoch);
+
+    console.log('hey');
+    console.log(warmup[0]);
+    console.log(epoch[1]);
+    console.log(warmup[2]);
+
+    console.log(warmup[0].gt(0));
+    console.log(epoch[1].gte(warmup[2]));
 
     return {
       balances: {
@@ -122,7 +134,7 @@ export const calculateUserBondDetails = createAsyncThunk(
     const bond = getBond(bondKey, networkID);
     const bondContract = contractForBond(bondKey, networkID, provider);
     const reserveContract = contractForReserve(bondKey, networkID, provider);
-    const sCLAM = new ethers.Contract(addresses.sCLAM_ADDRESS, StakedClamContract, provider);
+    const sCLAM = new ethers.Contract(addresses.sBBB_ADDRESS, StakedClamContract, provider);
 
     let interestDue, pendingPayout, bondMaturationTime;
 

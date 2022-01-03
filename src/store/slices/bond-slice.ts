@@ -99,6 +99,7 @@ export const calcBondDetails = createAsyncThunk(
         : ethers.utils.parseEther(value);
 
     const addresses = getAddresses(networkID);
+    console.log('bondKey : ' + bondKey);
     const bondContract = contractForBond(bondKey, networkID, provider);
     const bond = getBond(bondKey, networkID);
 
@@ -128,6 +129,7 @@ export const calcBondDetails = createAsyncThunk(
 
     const terms = await bondContract.terms();
     const maxPayout = await bondContract.maxPayout();
+    console.log('maxPayout: ' + maxPayout);
     const standardizedDebtRatio = await bondContract.standardizedDebtRatio();
 
     let debtRatio = standardizedDebtRatio / 1e9;
@@ -220,6 +222,7 @@ export const bondAsset = createAsyncThunk(
     const valueInWei = ethers.utils.parseEther(value);
 
     const signer = provider.getSigner();
+
     const bondContract = contractForBond(bondKey, networkID, signer);
 
     const calculatePremium = await bondContract.bondPrice();

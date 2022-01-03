@@ -140,7 +140,7 @@ function Migrate() {
               {!address ? (
                 <div className="stake-wallet-notification">
                   <div className="wallet-menu" id="wallet-menu">
-                    <Box bgcolor="otter.otterBlue" className="app-otter-button" onClick={connect}>
+                    <Box bgcolor="bibimbap.bibimbapBrown" className="app-otter-button" onClick={connect}>
                       <p>Connect Wallet</p>
                     </Box>
                   </div>
@@ -165,7 +165,7 @@ function Migrate() {
                       {canClaimWarmup && (
                         <Box
                           className="migrate-btn"
-                          bgcolor="otter.otterBlue"
+                          bgcolor="bibimbap.bibimbapBrown"
                           onClick={() => {
                             if (isPendingTxn(pendingTransactions, 'claimWarmup')) return;
                             onClaimWarmup();
@@ -189,7 +189,7 @@ function Migrate() {
                         (sCLAMAllowance > 0 ? (
                           <Box
                             className="migrate-btn"
-                            bgcolor="otter.otterBlue"
+                            bgcolor="bibimbap.bibimbapBrown"
                             onClick={() => {
                               if (isPendingTxn(pendingTransactions, 'unstaking')) return;
                               onUnstake();
@@ -200,7 +200,7 @@ function Migrate() {
                         ) : (
                           <Box
                             className="migrate-btn"
-                            bgcolor="otter.otterBlue"
+                            bgcolor="bibimbap.bibimbapBrown"
                             onClick={() => {
                               if (isPendingTxn(pendingTransactions, 'approve_unstaking')) return;
                               dispatch(approveUnstaking({ address, provider, networkID: chainID }));
@@ -231,7 +231,7 @@ function Migrate() {
                         (clamAllowance >= +oldClamBalance ? (
                           <Box
                             className="migrate-btn"
-                            bgcolor="otter.otterBlue"
+                            bgcolor="bibimbap.bibimbapBrown"
                             onClick={() => {
                               if (isPendingTxn(pendingTransactions, 'migrating')) return;
                               onMigrate();
@@ -242,7 +242,7 @@ function Migrate() {
                         ) : (
                           <Box
                             className="migrate-btn"
-                            bgcolor="otter.otterBlue"
+                            bgcolor="bibimbap.bibimbapBrown"
                             onClick={() => {
                               if (isPendingTxn(pendingTransactions, 'approve_migration')) return;
                               dispatch(approveMigration({ address, provider, networkID: chainID }));

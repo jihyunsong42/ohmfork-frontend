@@ -17,6 +17,7 @@ import './treasury-dashboard.scss';
 import apollo from '../../lib/apolloClient';
 import InfoTooltip from 'src/components/InfoTooltip/InfoTooltip.jsx';
 import Bibim from './bibim.png';
+import BibimDoingMath from './bibimDoingMath.png';
 import Bibimbap from './bibimbap.png';
 import { IReduxState } from 'src/store/slices/state.interface';
 
@@ -49,7 +50,7 @@ function TreasuryDashboard() {
       value: marketCap ? formatCurrency(marketCap, 0) : null,
     },
     {
-      title: 'CLAM Price',
+      title: 'BBB Price',
       value: marketPrice ? formatCurrency(marketPrice, 2) : null,
     },
     {
@@ -72,7 +73,7 @@ function TreasuryDashboard() {
       info: tooltipInfoMessages.staked,
     },
     {
-      title: 'Backing per CLAM',
+      title: 'Backing per BBB',
       value: backingPerClam ? formatCurrency(backingPerClam, 2) : null,
     },
     {
@@ -84,7 +85,7 @@ function TreasuryDashboard() {
     },
     {
       title: 'Current Index',
-      value: currentIndex ? trim(currentIndex, 2) + ' sCLAM' : null,
+      value: currentIndex ? trim(currentIndex, 2) + ' sBBB' : null,
       info: tooltipInfoMessages.currentIndex,
     },
   ];
@@ -119,7 +120,7 @@ function TreasuryDashboard() {
     <div id="treasury-dashboard-view" className={`${smallerScreen && 'smaller'} ${verySmallScreen && 'very-small'}`}>
       <div className="hero">
         <Box component="div" style={{ textAlign: 'center', marginBottom: '10vh' }} color="text.primary">
-          <img src={Bibim} />
+          <img src={BibimDoingMath} />
           <h2 style={{ color: '#C74B26' }}>Let's make (3, 3) to (비빔, 비빔)</h2>
           <h1>Welcome to The Bibimbap Land.</h1>
           <h3>The First Decentralized Finance 2.0 of Joseon Dynasty</h3>
