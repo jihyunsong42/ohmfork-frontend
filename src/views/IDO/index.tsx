@@ -246,7 +246,7 @@ export default function IDO() {
             <div className={styles.tokenAmounts}>
               <p className={styles.tokenAmount}>
                 {Intl.NumberFormat('en').format(Number(state.purchasedAmount || 0))}
-                <span className={styles.tokenTitle}>CLAM</span>
+                <span className={styles.tokenTitle}>BBB</span>
               </p>
             </div>
           </div>
@@ -259,7 +259,7 @@ export default function IDO() {
                 {Intl.NumberFormat('en').format(Number(state.purchasedAmount || 0) * 5)}
                 <span className={styles.tokenTitle}>MAI</span>
               </p>
-              <p className={styles.tokenSubTitle}>5 MAI = 1 CLAM</p>
+              <p className={styles.tokenSubTitle}>5 MAI = 1 BBB</p>
             </div>
           </div>
         )}
@@ -269,7 +269,7 @@ export default function IDO() {
             <div className={styles.tokenAmounts}>
               <p className={styles.tokenAmount}>
                 {Intl.NumberFormat('en').format(Number(state.stakingAmount || 0))}
-                <span className={styles.tokenTitle}>CLAM</span>
+                <span className={styles.tokenTitle}>BBBM</span>
               </p>
             </div>
           </div>
@@ -332,7 +332,7 @@ export default function IDO() {
       <div className={styles.claimClamBox}>
         {connected ? (
           <div className={styles.connectedBox}>
-            {loading || !state.connected ? (
+            {loading ? (
               <p className={styles.soldOut}>loading...</p>
             ) : !state.whitelisted ? (
               <p className={styles.soldOut}>Sorry, you are not in whitelist!</p>

@@ -18,12 +18,12 @@ function getStakedCLAMTokenImage(size: number = 32) {
   return <SvgIcon component={StakedClam} viewBox="0 0 100 100" style={style} />;
 }
 
-export type Token = 'clam' | 'mai' | 'sclam' | 'clam2' | 'sclam2';
+export type Token = 'BBB' | 'mai' | 'sBBB';
 
 export function getTokenImage(name: Token, size?: number): JSX.Element {
   if (name === 'mai') return getMAITokenImage(size);
-  if (name === 'clam' || name === 'clam2') return getCLAMTokenImage(size);
-  if (name === 'sclam' || name === 'sclam2') return getStakedCLAMTokenImage(size);
+  if (name === 'BBB') return getCLAMTokenImage(size);
+  if (name === 'sBBB') return getStakedCLAMTokenImage(size);
 
   throw Error(`Token image doesn't support: ${name}`);
 }
@@ -34,12 +34,12 @@ function toUrl(base: string): string {
 }
 
 export function getTokenUrl(name: Token) {
-  if (name === 'clam' || name === 'clam2') {
+  if (name === 'BBB') {
     const path = require('../assets/tokens/CLAM.svg').default;
     return toUrl(path);
   }
 
-  if (name === 'sclam' || name === 'sclam2') {
+  if (name === 'sBBB') {
     const path = require('../assets/tokens/sCLAM.svg').default;
     return toUrl(path);
   }

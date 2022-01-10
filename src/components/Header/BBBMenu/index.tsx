@@ -3,12 +3,12 @@ import { getAddresses, TOKEN_DECIMALS, DEFAULT_NETWORK } from '../../../constant
 import { useSelector } from 'react-redux';
 import { Link, SvgIcon, Popper, Button, Paper, Typography, Divider, Box, Fade, makeStyles } from '@material-ui/core';
 import { ReactComponent as ArrowUpIcon } from '../../../assets/icons/arrow-up.svg';
-import './clam-menu.scss';
+import './bbb-menu.scss';
 import { IReduxState } from '../../../store/slices/state.interface';
 import { getTokenUrl, Token } from '../../../helpers';
 
 const addTokenToWallet = (tokenSymbol: string, tokenAddress: string) => async () => {
-  const tokenImage = getTokenUrl(tokenSymbol.toLowerCase() as Token);
+  const tokenImage = getTokenUrl(tokenSymbol as Token);
 
   if (window.ethereum) {
     try {
@@ -38,7 +38,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function ClamMenu() {
+function BBBMenu() {
   const styles = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
   const isEthereumAPIAvailable = window.ethereum;
@@ -76,13 +76,13 @@ function ClamMenu() {
                 <Paper className={`${styles.popperMenu} ohm-menu`} elevation={1}>
                   <Box component="div" className="buy-tokens">
                     <Link
-                      href={'https://quickswap.exchange/#/swap?outputCurrency=' + BBB_ADDRESS}
+                      href={'https://app.sushi.com/swap?outputCurrency=' + BBB_ADDRESS}
                       target="_blank"
                       rel="noreferrer"
                     >
                       <Button size="large" variant="text" color="primary" fullWidth>
                         <Typography className="buy-text" align="left">
-                          Buy on QuickSwap <SvgIcon component={ArrowUpIcon} htmlColor="#A3A3A3" />
+                          Buy on SushiSwap <SvgIcon component={ArrowUpIcon} htmlColor="#A3A3A3" />
                         </Typography>
                       </Button>
                     </Link>
@@ -120,4 +120,4 @@ function ClamMenu() {
   );
 }
 
-export default ClamMenu;
+export default BBBMenu;

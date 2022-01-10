@@ -125,7 +125,7 @@ export const calcBondDetails = createAsyncThunk(
       bondQuote,
       maxUserCanBuy = userBalance;
 
-    const bondCalcContract = new ethers.Contract(addresses.CLAM_BONDING_CALC_ADDRESS, BondingCalcContract, provider);
+    const bondCalcContract = new ethers.Contract(addresses.BBB_BONDING_CALC_ADDRESS, BondingCalcContract, provider);
 
     const terms = await bondContract.terms();
     const maxPayout = await bondContract.maxPayout();
@@ -139,7 +139,10 @@ export const calcBondDetails = createAsyncThunk(
 
     try {
       bondPrice = await bondContract.bondPriceInUSD();
+      console.log('marketPrice: ' + rawMarketPrice.toNumber());
+      console.log('bondPrice : ' + bondPrice);
       bondDiscount = (rawMarketPrice.toNumber() * 1e9 - bondPrice) / bondPrice;
+      console.log('discount : ' + bondDiscount);
     } catch (e) {
       console.log('error getting bondPriceInUSD', e);
     }
@@ -174,7 +177,7 @@ export const calcBondDetails = createAsyncThunk(
       alert(
         "You're trying to bond more than the maximum payout available! The maximum bond payout is " +
           (maxPayout / 1e9).toFixed(2).toString() +
-          ' CLAM.',
+          ' BBB.',
       );
     }
 

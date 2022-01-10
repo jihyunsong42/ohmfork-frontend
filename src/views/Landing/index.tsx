@@ -6,9 +6,11 @@ import { Backdrop, Button, Link, Paper } from '@material-ui/core';
 import Shell from './shell.png';
 import SecondSection from './components/SecondSection';
 import Footer from './components/Footer';
-import { DiscordLink, GithubLink, TwitterLink } from 'src/constants';
+import { DiscordLink, GithubLink, TwitterLink, MediumLink, TelegramLink } from 'src/constants';
 import TwitterIcon from './images/twitter.svg';
 import DiscordIcon from './images/icon_discord.svg';
+import MediumIcon from './images/icon_medium.svg';
+import TelegramIcon from './images/icon_telegram.svg';
 import GithubIcon from './images/icon_github.svg';
 import Bibim01 from './images/bibim_01.png';
 import CloseIcon from './images/icon_24x24_close.svg';
@@ -58,6 +60,12 @@ function Landing() {
               <Link href={DiscordLink} className="community-icon-link">
                 <img src={DiscordIcon} />
               </Link>
+              <Link href={MediumLink} className="community-icon-link">
+                <img src={MediumIcon} />
+              </Link>
+              <Link href={TelegramLink} className="community-icon-link">
+                <img src={TelegramIcon} />
+              </Link>
               {/* <Link href={GithubLink} className="community-icon-link">
                 <img src={GithubIcon} />
               </Link> */}
@@ -73,7 +81,7 @@ function Landing() {
       </section>
       {/* <h1>Coming Soon...</h1> */}
       {/* <Stat /> */}
-      {/* <SecondSection /> */}
+      <SecondSection />
       <Footer />
       {/* <Backdrop open={open} className="whitelist-check">
         <div className="whitelist-container">

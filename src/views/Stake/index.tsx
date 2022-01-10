@@ -65,17 +65,17 @@ function Stake() {
   const fiveDayRate = useSelector<IReduxState, number>(state => {
     return state.app.fiveDayRate;
   });
-  const clamBalance = useSelector<IReduxState, string>(state => {
-    return state.account.balances && state.account.balances.clam;
+  const BBBBalance = useSelector<IReduxState, string>(state => {
+    return state.account.balances && state.account.balances.BBB;
   });
-  const sClamBalance = useSelector<IReduxState, string>(state => {
-    return state.account.balances && state.account.balances.sClam;
+  const sBBBBalance = useSelector<IReduxState, string>(state => {
+    return state.account.balances && state.account.balances.sBBB;
   });
   const stakeAllowance = useSelector<IReduxState, number>(state => {
-    return state.account.staking && state.account.staking.clamStake;
+    return state.account.staking && state.account.staking.BBBStake;
   });
   const unstakeAllowance = useSelector<IReduxState, number>(state => {
-    return state.account.staking && state.account.staking.sClamUnstake;
+    return state.account.staking && state.account.staking.sBBBUnstake;
   });
   const warmupBalance = useSelector<IReduxState, string>(state => {
     return state.account.staking && state.account.staking.warmup;
@@ -98,9 +98,9 @@ function Stake() {
 
   const setMax = () => {
     if (view === 0) {
-      setQuantity(clamBalance);
+      setQuantity(BBBBalance);
     } else {
-      setQuantity(sClamBalance);
+      setQuantity(sBBBBalance);
     }
   };
 
@@ -125,8 +125,8 @@ function Stake() {
 
   const hasAllowance = useCallback(
     token => {
-      if (token === 'CLAM') return stakeAllowance > 0;
-      if (token === 'sCLAM') return unstakeAllowance > 0;
+      if (token === 'BBB') return stakeAllowance > 0;
+      if (token === 'sBBB') return unstakeAllowance > 0;
       return 0;
     },
     [stakeAllowance],
@@ -136,10 +136,10 @@ function Stake() {
     setView(newView);
   };
 
-  const trimmedSClamBalance = trim(Number(sClamBalance), 4);
+  const trimmedSBBBBalance = trim(Number(sBBBBalance), 4);
   const stakingRebasePercentage = trim(stakingRebase * 100, 4);
   const nextRewardValue = trim(
-    (Number(stakingRebasePercentage) / 100) * (Number(trimmedSClamBalance) + Number(warmupBalance)),
+    (Number(stakingRebasePercentage) / 100) * (Number(trimmedSBBBBalance) + Number(warmupBalance)),
     4,
   );
 
@@ -156,9 +156,7 @@ function Stake() {
           <Grid container direction="column" spacing={2}>
             <Grid item>
               <div className="card-header">
-                <p className="single-stake-title">
-                  CLAM Staking ({String.fromCodePoint(0x1f9a6)}, {String.fromCodePoint(0x1f9a6)})
-                </p>
+                <p className="single-stake-title">BBB Staking (비빔, 비빔)</p>
                 <RebaseTimer />
               </div>
             </Grid>
@@ -203,7 +201,7 @@ function Stake() {
                     <div className="stake-index">
                       <p className="single-stake-subtitle">Current Index</p>
                       <Box component="p" color="text.secondary" className="single-stake-subtitle-value">
-                        {currentIndex ? <>{trim(Number(currentIndex), 3)} sCLAM2</> : <Skeleton width="150px" />}
+                        {currentIndex ? <>{trim(Number(currentIndex), 3)} sBBB</> : <Skeleton width="150px" />}
                       </Box>
                     </div>
                   </Grid>
@@ -219,7 +217,7 @@ function Stake() {
                       <p>Connect Wallet</p>
                     </Box>
                   </div>
-                  <p className="desc-text">Connect your wallet to stake CLAM2 tokens!</p>
+                  <p className="desc-text">Connect your wallet to stake BBB tokens!</p>
                 </div>
               ) : (
                 <>
@@ -260,7 +258,7 @@ function Stake() {
 
                       <TabPanel value={view} index={0} className="stake-tab-panel">
                         <div className="stake-tab-buttons-group">
-                          {address && hasAllowance('CLAM') ? (
+                          {address && hasAllowance('BBB') ? (
                             <Box
                               className="stake-tab-panel-btn"
                               bgcolor="bibimbap.bibimbapBrown"
@@ -277,7 +275,7 @@ function Stake() {
                               bgcolor="bibimbap.bibimbapBrown"
                               onClick={() => {
                                 if (isPendingTxn(pendingTransactions, 'approve_staking')) return;
-                                onSeekApproval('CLAM');
+                                onSeekApproval('BBB');
                               }}
                             >
                               <p>{txnButtonText(pendingTransactions, 'approve_staking', 'Approve')}</p>
@@ -299,7 +297,7 @@ function Stake() {
                       </TabPanel>
 
                       <TabPanel value={view} index={1} className="stake-tab-panel">
-                        {address && hasAllowance('sCLAM') ? (
+                        {address && hasAllowance('sBBB') ? (
                           <Box
                             className="stake-tab-panel-btn"
                             bgcolor="bibimbap.bibimbapBrown"
@@ -308,7 +306,7 @@ function Stake() {
                               onChangeStake('unstake');
                             }}
                           >
-                            <p>{txnButtonText(pendingTransactions, 'unstaking', 'Unstake CLAM2')}</p>
+                            <p>{txnButtonText(pendingTransactions, 'unstaking', 'Unstake BBB')}</p>
                           </Box>
                         ) : (
                           <Box
@@ -316,7 +314,7 @@ function Stake() {
                             bgcolor="bibimbap.bibimbapBrown"
                             onClick={() => {
                               if (isPendingTxn(pendingTransactions, 'approve_unstaking')) return;
-                              onSeekApproval('sCLAM');
+                              onSeekApproval('sBBB');
                             }}
                           >
                             <p>{txnButtonText(pendingTransactions, 'approve_unstaking', 'Approve')}</p>
@@ -326,7 +324,7 @@ function Stake() {
                     </Box>
 
                     <div className="help-text">
-                      {address && ((!hasAllowance('CLAM') && view === 0) || (!hasAllowance('sCLAM') && view === 1)) && (
+                      {address && ((!hasAllowance('BBB') && view === 0) || (!hasAllowance('sBBB') && view === 1)) && (
                         <p className="text-desc">
                           Note: The "Approve" transaction is only needed when staking/unstaking for the first time;
                           subsequent staking/unstaking only requires you to perform the "Stake" or "Unstake"
@@ -341,7 +339,7 @@ function Stake() {
                       <div className="data-row">
                         <p className="data-row-name-warmup">Your Staked Balance in warmup</p>
                         <p className="data-row-value">
-                          {isAppLoading ? <Skeleton width="80px" /> : <>{trim(Number(warmupBalance), 4)} CLAM2</>}
+                          {isAppLoading ? <Skeleton width="80px" /> : <>{trim(Number(warmupBalance), 4)} BBB</>}
                         </p>
                       </div>
                     )}
@@ -349,7 +347,7 @@ function Stake() {
                     <div className="data-row">
                       <p className="data-row-name">Your Balance</p>
                       <p className="data-row-value">
-                        {isAppLoading ? <Skeleton width="80px" /> : <>{trim(Number(clamBalance), 4)} CLAM2</>}
+                        {isAppLoading ? <Skeleton width="80px" /> : <>{trim(Number(BBBBalance), 4)} BBB</>}
                       </p>
                     </div>
                     <div className="data-row">
@@ -358,7 +356,7 @@ function Stake() {
                         {isAppLoading ? (
                           <Skeleton width="80px" />
                         ) : (
-                          <>{new Intl.NumberFormat('en-US').format(Number(trimmedSClamBalance))} sCLAM2</>
+                          <>{new Intl.NumberFormat('en-US').format(Number(trimmedSBBBBalance))} sBBB</>
                         )}
                       </p>
                     </div>
@@ -366,7 +364,7 @@ function Stake() {
                     <div className="data-row">
                       <p className="data-row-name">Next Reward Amount</p>
                       <p className="data-row-value">
-                        {isAppLoading ? <Skeleton width="80px" /> : <>{nextRewardValue} sCLAM2</>}
+                        {isAppLoading ? <Skeleton width="80px" /> : <>{nextRewardValue} sBBB</>}
                       </p>
                     </div>
 

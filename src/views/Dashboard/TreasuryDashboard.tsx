@@ -37,7 +37,7 @@ function TreasuryDashboard() {
   const totalSupply = useSelector<IReduxState, number>(state => state.app.totalSupply);
   const marketCap = useSelector<IReduxState, number>(state => state.app.marketCap);
   const currentIndex = useSelector<IReduxState, string>(state => state.app.currentIndex);
-  const backingPerClam = useSelector<IReduxState, number>(state => state.app.backingPerClam);
+  const backingPerBBB = useSelector<IReduxState, number>(state => state.app.backingPerBBB);
   const stakingAPY = useSelector<IReduxState, number>(state => state.app.stakingAPY);
   const stakingTVL = useSelector<IReduxState, number>(state => state.app.stakingTVL);
   const treasuryRunway = useSelector<IReduxState, number>(state => state.app.treasuryRunway);
@@ -74,7 +74,7 @@ function TreasuryDashboard() {
     },
     {
       title: 'Backing per BBB',
-      value: backingPerClam ? formatCurrency(backingPerClam, 2) : null,
+      value: backingPerBBB ? formatCurrency(backingPerBBB, 2) : null,
     },
     {
       title: 'Runway',
@@ -120,7 +120,7 @@ function TreasuryDashboard() {
     <div id="treasury-dashboard-view" className={`${smallerScreen && 'smaller'} ${verySmallScreen && 'very-small'}`}>
       <div className="hero">
         <Box component="div" style={{ textAlign: 'center', marginBottom: '10vh' }} color="text.primary">
-          <img src={BibimDoingMath} />
+          <img src={BibimDoingMath} width="235" />
           <h2 style={{ color: '#C74B26' }}>Let's make (3, 3) to (비빔, 비빔)</h2>
           <h1>Welcome to The Bibimbap Land.</h1>
           <h3>The First Decentralized Finance 2.0 of Joseon Dynasty</h3>

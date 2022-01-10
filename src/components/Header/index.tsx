@@ -2,7 +2,7 @@ import { AppBar, Toolbar, Box, Button, SvgIcon } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { ReactComponent as MenuIcon } from '../../assets/icons/icon_24x24_hamburger.svg';
-import ClamMenu from './ClamMenu';
+import BBBMenu from './BBBMenu';
 import ConnectMenu from './ConnectMenu';
 import './topbar.scss';
 
@@ -71,7 +71,7 @@ function Header({ handleDrawerToggle, drawe }: IHeader) {
             </Button>
 
             <Box display="flex">
-              {!isVerySmallScreen && <ClamMenu />}
+              {!isVerySmallScreen && <BBBMenu />}
 
               <ConnectMenu />
             </Box>

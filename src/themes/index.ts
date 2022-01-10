@@ -2,7 +2,7 @@ import { createTheme, responsiveFontSizes } from '@material-ui/core/styles';
 import commonSettings from './global';
 
 const colors = {
-  bibimbapDark: '#020203',
+  bibimbapDark: '#0b0e13',
   bibimbapBrown: '#c74b26',
   bibimbapBrownHover: '#c73a05',
   darkGray200: '#5E6E99',
@@ -11,7 +11,7 @@ const colors = {
 };
 
 const lightTheme = {
-  color: '#020203',
+  color: '#0b0e13',
   white: '#ffffff',
   gold: '#F8CC82',
   gray: '#A3A3A3',

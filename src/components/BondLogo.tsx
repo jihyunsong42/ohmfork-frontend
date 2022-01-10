@@ -8,8 +8,8 @@ interface IBondHeaderProps {
 
 function BondHeader({ bond }: IBondHeaderProps) {
   const reserveAssetImg = () => {
-    if (bond.key.indexOf('clam') >= 0) {
-      return getTokenImage('clam');
+    if (bond.key.indexOf('bbb') >= 0) {
+      return getTokenImage('BBB');
     } else if (bond.key.indexOf('mai') >= 0) {
       return getTokenImage('mai');
     }

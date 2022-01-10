@@ -23,7 +23,7 @@ const pendingTxnsSlice = createSlice({
 });
 
 export const getStakingTypeText = (action: string) => {
-  return action.toLowerCase() === 'stake' ? 'Staking CLAM' : 'Unstaking sCLAM';
+  return action.toLowerCase() === 'stake' ? 'Staking BBB' : 'Unstaking sBBB';
 };
 
 export const isPendingTxn = (pendingTransactions: IPendingTxn[], type: string) => {

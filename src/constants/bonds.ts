@@ -1,8 +1,8 @@
 import { getAddresses } from '.';
 
-export type BondKey = 'mai' | 'mai_clam';
+export type BondKey = 'mai' | 'mai_bbb';
 
-export const BondKeys: BondKey[] = ['mai', 'mai_clam'];
+export const BondKeys: BondKey[] = ['mai', 'mai_bbb'];
 
 export const ReserveKeys: BondKey[] = ['mai'];
 
@@ -32,12 +32,12 @@ export function listBonds(chainId: number): BondMap {
   return {
     mai: {
       key: 'mai',
-      name: 'MAI v2',
+      name: 'MAI',
       address: BONDS.MAI,
       reserve: RESERVES.MAI,
       reserveUnit: 'MAI',
       type: 'token',
-      dexUrl: `https://quickswap.exchange/#/swap?outputCurrency=${MAI_ADDRESS}`,
+      dexUrl: `https://app.sushi.com/swap?outputCurrency=${MAI_ADDRESS}`,
       deprecated: false,
       autostake: false,
     },
@@ -52,11 +52,11 @@ export function listBonds(chainId: number): BondMap {
     //   deprecated: false,
     //   autostake: true,
     // },
-    mai_clam: {
-      key: 'mai_clam',
-      name: 'MAI-CLAM2 LP',
-      address: BONDS.MAI_CLAM,
-      reserve: RESERVES.MAI_CLAM,
+    mai_bbb: {
+      key: 'mai_bbb',
+      name: 'MAI-BBB LP',
+      address: BONDS.MAI_BBB,
+      reserve: RESERVES.MAI_BBB,
       reserveUnit: 'LP',
       type: 'lp',
       dexUrl: `https://app.sushi.com/add/${MAI_ADDRESS}/${BBB_ADDRESS}`,

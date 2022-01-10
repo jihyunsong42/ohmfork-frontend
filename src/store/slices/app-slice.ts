@@ -3,10 +3,10 @@ import { createAsyncThunk, createSelector, createSlice } from '@reduxjs/toolkit'
 import { BigNumber, ethers } from 'ethers';
 import {
   BondingCalcContract,
-  ClamCirculatingSupply,
-  ClamTokenContract,
-  ClamTokenMigrator,
-  StakedClamContract,
+  BBBCirculatingSupply,
+  BBBTokenContract,
+  BBBTokenMigrator,
+  StakedBBBContract,
   StakingContract,
 } from '../../abi';
 import { getAddresses, ReserveKeys } from '../../constants';
@@ -33,7 +33,7 @@ export interface IApp {
   networkID: number;
   nextRebase: number;
   stakingRatio: number;
-  backingPerClam: number;
+  backingPerBBB: number;
   treasuryRunway: number;
   pol: number;
 }
@@ -53,14 +53,10 @@ export const loadAppDetails = createAsyncThunk(
     const currentBlock = await provider.getBlockNumber();
     const currentBlockTime = (await provider.getBlock(currentBlock)).timestamp;
 
-    const clamContract = new ethers.Contract(addresses.BBB_ADDRESS, ClamTokenContract, provider);
-    const sCLAMContract = new ethers.Contract(addresses.sBBB_ADDRESS, StakedClamContract, provider);
-    const bondCalculator = new ethers.Contract(addresses.CLAM_BONDING_CALC_ADDRESS, BondingCalcContract, provider);
-    const clamCirculatingSupply = new ethers.Contract(
-      addresses.CLAM_CIRCULATING_SUPPLY,
-      ClamCirculatingSupply,
-      provider,
-    );
+    const BBBContract = new ethers.Contract(addresses.BBB_ADDRESS, BBBTokenContract, provider);
+    const sBBBContract = new ethers.Contract(addresses.sBBB_ADDRESS, StakedBBBContract, provider);
+    const bondCalculator = new ethers.Contract(addresses.BBB_BONDING_CALC_ADDRESS, BondingCalcContract, provider);
+    const bbbCirculatingSupply = new ethers.Contract(addresses.BBB_CIRCULATING_SUPPLY, BBBCirculatingSupply, provider);
     const stakingContract = new ethers.Contract(addresses.STAKING_ADDRESS, StakingContract, provider);
 
     let reserveAmount = (
@@ -73,35 +69,29 @@ export const loadAppDetails = createAsyncThunk(
       )
     ).reduce((prev, value) => prev + value);
 
-    const lp = contractForReserve('mai_clam', networkID, provider);
-    const maiClamAmount = await lp.balanceOf(addresses.TREASURY_ADDRESS);
-    const valuation = await bondCalculator.valuation(addressForReserve('mai_clam', networkID), maiClamAmount);
-    const markdown = await bondCalculator.markdown(addressForReserve('mai_clam', networkID));
+    const lp = contractForReserve('mai_bbb', networkID, provider);
+    const maiBBBAmount = await lp.balanceOf(addresses.TREASURY_ADDRESS);
+    const valuation = await bondCalculator.valuation(addressForReserve('mai_bbb', networkID), maiBBBAmount);
+    const markdown = await bondCalculator.markdown(addressForReserve('mai_bbb', networkID));
 
-    const maiClamUSD = (valuation / 1e9) * (markdown / 1e18);
-    const [rfvLPValue, pol] = await getDiscountedPairUSD(maiClamAmount, networkID, provider);
+    const maiBBBUSD = (valuation / 1e9) * (markdown / 1e18);
+    const [rfvLPValue, pol] = await getDiscountedPairUSD(maiBBBAmount, networkID, provider);
 
-    const treasuryBalance = reserveAmount + maiClamUSD;
+    const treasuryBalance = reserveAmount + maiBBBUSD;
     const treasuryRiskFreeValue = reserveAmount + rfvLPValue;
 
     const stakingBalance = await stakingContract.contractBalance();
-    const circSupply = (await clamCirculatingSupply.CLAMCirculatingSupply()) / 1e9;
-    const totalSupply = (await clamContract.totalSupply()) / 1e9;
+    const circSupply = (await bbbCirculatingSupply.CLAMCirculatingSupply()) / 1e9;
+    const totalSupply = (await BBBContract.totalSupply()) / 1e9;
     const epoch = await stakingContract.epoch();
     const stakingReward = epoch.distribute / 1e9;
-    const sClamCirc = (await sCLAMContract.circulatingSupply()) / 1e9;
-    const stakingRebase = stakingReward / sClamCirc;
+    const sBBBCirc = (await sBBBContract.circulatingSupply()) / 1e9;
+    const stakingRebase = stakingReward / sBBBCirc;
     const fiveDayRate = Math.pow(1 + stakingRebase, 5 * 3) - 1;
     const stakingAPY = Math.pow(1 + stakingRebase, 365 * 3) - 1;
-    console.log('epoch : ');
-    console.log(epoch);
-    console.log('staking Reward : ' + stakingReward);
-    console.log('sClamCirc : ' + sClamCirc);
-    console.log('staking Rebase = stakingReward(' + stakingReward + ') / sClamCirc(' + sClamCirc + ').');
-    console.log('staking Reward = epoch.distribute' + epoch.distribute / 1e9);
-    console.log('staking APY : ' + stakingAPY);
-    const stakingRatio = sClamCirc / circSupply;
-    const backingPerClam = treasuryBalance / circSupply;
+
+    const stakingRatio = sBBBCirc / circSupply;
+    const backingPerBBB = treasuryBalance / circSupply;
     const currentIndex = await stakingContract.index();
     const nextRebase = epoch.endTime.toNumber();
 
@@ -110,7 +100,7 @@ export const loadAppDetails = createAsyncThunk(
     const stakingTVL = (stakingBalance * marketPrice) / 1e9;
     const marketCap = circSupply * marketPrice;
 
-    const treasuryRunway = Math.log(treasuryRiskFreeValue / sClamCirc) / Math.log(1 + stakingRebase) / 3;
+    const treasuryRunway = Math.log(treasuryRiskFreeValue / sBBBCirc) / Math.log(1 + stakingRebase) / 3;
 
     return {
       currentIndex: ethers.utils.formatUnits(currentIndex, 'gwei'), // Current Index
@@ -123,31 +113,31 @@ export const loadAppDetails = createAsyncThunk(
       stakingAPY, // Staking APY
       stakingTVL, // Staking TVL
       stakingRebase,
-      marketPrice, // CLAM Price
+      marketPrice, // BBB Price
       currentBlockTime,
       nextRebase,
       stakingRatio, // Staking Ratio
-      backingPerClam, // Backing Per CLAM
+      backingPerBBB, // Backing Per BBB
       treasuryRunway, // Runway
       pol,
     };
   },
 );
 
-//(slp_treasury/slp_supply)*(2*sqrt(lp_dai * lp_clam))
+//(slp_treasury/slp_supply)*(2*sqrt(lp_dai * lp_bbb))
 async function getDiscountedPairUSD(
   lpAmount: BigNumber,
   networkID: number,
   provider: JsonRpcProvider,
 ): Promise<[number, number]> {
-  const pair = contractForReserve('mai_clam', networkID, provider);
+  const pair = contractForReserve('mai_bbb', networkID, provider);
   const total_lp = await pair.totalSupply();
   const reserves = await pair.getReserves();
   const address = getAddresses(networkID);
-  const [clam, mai] = BigNumber.from(address.MAI_ADDRESS).gt(address.BBB_ADDRESS)
+  const [bbb, mai] = BigNumber.from(address.MAI_ADDRESS).gt(address.BBB_ADDRESS)
     ? [reserves[0], reserves[1]]
     : [reserves[1], reserves[0]];
-  const lp_token_1 = clam / 1e9;
+  const lp_token_1 = bbb / 1e9;
   const lp_token_2 = mai / 1e18;
   const kLast = lp_token_1 * lp_token_2;
 

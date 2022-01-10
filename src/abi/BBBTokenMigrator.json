@@ -1,6 +1,6 @@
 {
   "_format": "hh-sol-artifact-1",
-  "contractName": "ClamTokenMigrator",
+  "contractName": "BBBTokenMigrator",
   "sourceName": "contracts/migration/ClamTokenMigrator.sol",
   "abi": [
     {

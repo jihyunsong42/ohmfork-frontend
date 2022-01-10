@@ -186,7 +186,7 @@ export function BondTableRow({ bondKey }: IBondProps) {
       </TableCell>
       <TableCell>
         <p className="bond-name-title">
-          {myBalance ? `${trim(myBalance, 2)} ${bond.autostake ? 'sCLAM' : 'CLAM'}` : '-'}
+          {myBalance ? `${trim(myBalance, 2)} ${bond.autostake ? 'sBBB' : 'BBB'}` : '-'}
         </p>
       </TableCell>
       <TableCell>

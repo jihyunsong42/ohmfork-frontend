@@ -1,6 +1,6 @@
 import { ethers } from 'ethers';
 import { BondKey, getBond } from 'src/constants';
-import { ClamMaiReserveContract, MaiReserveContract } from '../abi';
+import { BBBMaiReserveContract, MaiReserveContract } from '../abi';
 
 export const contractForReserve = (
   bondKey: BondKey,
@@ -9,7 +9,7 @@ export const contractForReserve = (
 ) => {
   const { type, reserve } = getBond(bondKey, networkID);
   if (type === 'lp') {
-    return new ethers.Contract(reserve, ClamMaiReserveContract, provider);
+    return new ethers.Contract(reserve, BBBMaiReserveContract, provider);
   }
   return new ethers.Contract(reserve, MaiReserveContract, provider);
 };

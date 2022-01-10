@@ -97,9 +97,9 @@ function BondRedeem({ bondKey }: IBondRedeem) {
               {isBondLoading ? (
                 <Skeleton width="100px" />
               ) : bond.autostake ? (
-                `${trim(interestDue, 4)} sCLAM`
+                `${trim(interestDue, 4)} sBBB`
               ) : (
-                `${trim(interestDue, 4)} CLAM`
+                `${trim(interestDue, 4)} BBB`
               )}
             </p>
           </div>
@@ -107,7 +107,7 @@ function BondRedeem({ bondKey }: IBondRedeem) {
             <div className="data-row">
               <p className="bond-balance-title">Claimable Rewards</p>
               <p className="price-data bond-balance-value">
-                {isBondLoading ? <Skeleton width="100px" /> : `${trim(pendingPayout, 4)} CLAM`}
+                {isBondLoading ? <Skeleton width="100px" /> : `${trim(pendingPayout, 4)} BBB`}
               </p>
             </div>
           )}

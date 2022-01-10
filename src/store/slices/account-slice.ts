@@ -1,6 +1,6 @@
 import { ethers } from 'ethers';
 import { BondKey, getAddresses, getBond } from '../../constants';
-import { ClamTokenContract, StakedClamContract, MAIContract, StakingContract } from '../../abi/';
+import { BBBTokenContract, StakedBBBContract, MAIContract, StakingContract } from '../../abi/';
 import { contractForBond, contractForReserve, setAll } from '../../helpers';
 
 import { createSlice, createSelector, createAsyncThunk } from '@reduxjs/toolkit';
@@ -34,12 +34,12 @@ interface IUserBondDetails {
 export interface IAccount {
   balances: {
     mai: string;
-    sClam: string;
-    clam: string;
+    sBBB: string;
+    BBB: string;
   };
   staking: {
-    clamStake: number;
-    sClamUnstake: number;
+    BBBStake: number;
+    sBBBUnstake: number;
     warmup: string;
     canClaimWarmup: boolean;
   };
@@ -49,14 +49,14 @@ export const getBalances = createAsyncThunk(
   'account/getBalances',
   async ({ address, networkID, provider }: IAccountProps) => {
     const addresses = getAddresses(networkID);
-    const sClamContract = new ethers.Contract(addresses.sBBB_ADDRESS, StakedClamContract, provider);
-    const sClamBalance = await sClamContract.balanceOf(address);
-    const clamContract = new ethers.Contract(addresses.BBB_ADDRESS, ClamTokenContract, provider);
-    const clamBalance = await clamContract.balanceOf(address);
+    const sBBBContract = new ethers.Contract(addresses.sBBB_ADDRESS, StakedBBBContract, provider);
+    const sBBBBalance = await sBBBContract.balanceOf(address);
+    const BBBContract = new ethers.Contract(addresses.BBB_ADDRESS, BBBTokenContract, provider);
+    const BBBBalance = await BBBContract.balanceOf(address);
     return {
       balances: {
-        sClam: ethers.utils.formatUnits(sClamBalance, 9),
-        clam: ethers.utils.formatUnits(clamBalance, 9),
+        sBBB: ethers.utils.formatUnits(sBBBBalance, 9),
+        BBB: ethers.utils.formatUnits(BBBBalance, 9),
       },
     };
   },
@@ -68,44 +68,32 @@ export const loadAccountDetails = createAsyncThunk(
     const addresses = getAddresses(networkID);
 
     const maiContract = new ethers.Contract(addresses.MAI_ADDRESS, MAIContract, provider);
-    const clamContract = new ethers.Contract(addresses.BBB_ADDRESS, ClamTokenContract, provider);
-    const sClamContract = new ethers.Contract(addresses.sBBB_ADDRESS, StakedClamContract, provider);
+    const BBBContract = new ethers.Contract(addresses.BBB_ADDRESS, BBBTokenContract, provider);
+    const sBBBContract = new ethers.Contract(addresses.sBBB_ADDRESS, StakedBBBContract, provider);
     const stakingContract = new ethers.Contract(addresses.STAKING_ADDRESS, StakingContract, provider);
 
-    const [maiBalance, clamBalance, stakeAllowance, sClamBalance, unstakeAllowance, warmup, epoch] = await Promise.all([
+    const [maiBalance, BBBBalance, stakeAllowance, sBBBBalance, unstakeAllowance, warmup, epoch] = await Promise.all([
       maiContract.balanceOf(address),
-      clamContract.balanceOf(address),
-      clamContract.allowance(address, addresses.STAKING_HELPER_ADDRESS),
-      sClamContract.balanceOf(address),
-      sClamContract.allowance(address, addresses.STAKING_ADDRESS),
+      BBBContract.balanceOf(address),
+      BBBContract.allowance(address, addresses.STAKING_HELPER_ADDRESS),
+      sBBBContract.balanceOf(address),
+      sBBBContract.allowance(address, addresses.STAKING_ADDRESS),
       stakingContract.warmupInfo(address),
       stakingContract.epoch(),
     ]);
 
     const gons = warmup[1];
-    const warmupBalance = await sClamContract.balanceForGons(gons);
-
-    console.log('hh');
-    console.log(warmup);
-    console.log(epoch);
-
-    console.log('hey');
-    console.log(warmup[0]);
-    console.log(epoch[1]);
-    console.log(warmup[2]);
-
-    console.log(warmup[0].gt(0));
-    console.log(epoch[1].gte(warmup[2]));
+    const warmupBalance = await sBBBContract.balanceForGons(gons);
 
     return {
       balances: {
-        sClam: ethers.utils.formatUnits(sClamBalance, 9),
-        clam: ethers.utils.formatUnits(clamBalance, 9),
+        sBBB: ethers.utils.formatUnits(sBBBBalance, 9),
+        BBB: ethers.utils.formatUnits(BBBBalance, 9),
         mai: ethers.utils.formatEther(maiBalance),
       },
       staking: {
-        clamStake: +stakeAllowance,
-        sClamUnstake: +unstakeAllowance,
+        BBBStake: +stakeAllowance,
+        sBBBUnstake: +unstakeAllowance,
         warmup: ethers.utils.formatUnits(warmupBalance, 9),
         canClaimWarmup: warmup[0].gt(0) && epoch[1].gte(warmup[2]),
       },
@@ -134,12 +122,12 @@ export const calculateUserBondDetails = createAsyncThunk(
     const bond = getBond(bondKey, networkID);
     const bondContract = contractForBond(bondKey, networkID, provider);
     const reserveContract = contractForReserve(bondKey, networkID, provider);
-    const sCLAM = new ethers.Contract(addresses.sBBB_ADDRESS, StakedClamContract, provider);
+    const sBBB = new ethers.Contract(addresses.sBBB_ADDRESS, StakedBBBContract, provider);
 
     let interestDue, pendingPayout, bondMaturationTime;
 
     const bondDetails = await bondContract.bondInfo(address);
-    interestDue = (bond.autostake ? await sCLAM.balanceForGons(bondDetails.gonsPayout) : bondDetails.payout) / 1e9;
+    interestDue = (bond.autostake ? await sBBB.balanceForGons(bondDetails.gonsPayout) : bondDetails.payout) / 1e9;
     bondMaturationTime = +bondDetails.vesting + +bondDetails.lastTimestamp;
     pendingPayout = await bondContract.pendingPayoutFor(address);
 

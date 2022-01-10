@@ -1,6 +1,7 @@
 @import 'styles/_colors.scss';
 
 .sidebar {
+  overflow-y: hidden;
   min-width: 280px;
   z-index: 2;
   border-radius: 0 !important;
@@ -12,6 +13,7 @@
 
 .dapp-sidebar {
   border-radius: 0 !important;
+  height: 100%;
 }
 
 .dapp-menu-item {

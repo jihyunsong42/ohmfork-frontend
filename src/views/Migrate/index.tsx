@@ -43,16 +43,16 @@ function Migrate() {
 
   const isAppLoading = useSelector<IReduxState, boolean>(state => state.migrate.loading);
 
-  const oldClamTotalSupply = useSelector<IReduxState, number>(state => state.migrate?.oldClamTotalSupply);
+  const oldBBBTotalSupply = useSelector<IReduxState, number>(state => state.migrate?.oldBBBTotalSupply);
   const oldTreasuryBalance = useSelector<IReduxState, number>(state => state.migrate?.oldTreasuryBalance);
   const migrateProgress = useSelector<IReduxState, number>(state => state.migrate?.migrateProgress);
-  const clamBalance = useSelector<IReduxState, string>(state => state.account.balances?.clam);
-  const oldClamBalance = useSelector<IReduxState, string>(state => state.migrate?.oldClam);
-  const oldSClamBalance = useSelector<IReduxState, string>(state => state.migrate?.oldSClam);
+  const BBBBalance = useSelector<IReduxState, string>(state => state.account.balances?.BBB);
+  const oldBBBBalance = useSelector<IReduxState, string>(state => state.migrate?.oldBBB);
+  const oldSBBBBalance = useSelector<IReduxState, string>(state => state.migrate?.oldSBBB);
   const oldWarmupBalance = useSelector<IReduxState, string>(state => state.migrate?.oldWarmup);
   const canClaimWarmup = useSelector<IReduxState, boolean>(state => state.migrate?.canClaimWarmup);
-  const clamAllowance = useSelector<IReduxState, number>(state => state.migrate?.clamAllowance);
-  const sCLAMAllowance = useSelector<IReduxState, number>(state => state.migrate?.sCLAMAllowance);
+  const BBBAllowance = useSelector<IReduxState, number>(state => state.migrate?.BBBAllowance);
+  const sBBBAllowance = useSelector<IReduxState, number>(state => state.migrate?.sBBBAllowance);
   const pendingTransactions = useSelector<IReduxState, IPendingTxn[]>(state => {
     return state.pendingTransactions;
   });
@@ -62,7 +62,7 @@ function Migrate() {
   };
 
   const onUnstake = async () => {
-    await dispatch(unstake({ address, value: oldSClamBalance, provider, networkID: chainID }));
+    await dispatch(unstake({ address, value: oldSBBBBalance, provider, networkID: chainID }));
   };
 
   const onClaimWarmup = async () => {
@@ -94,7 +94,7 @@ function Migrate() {
             <Grid item>
               <div className="card-header">
                 <p className="single-stake-title">
-                  CLAM → CLAM2 Migration ({<img src={SCLAM} />},{<img src={SCLAM} />})
+                  BBB → BBB2 Migration ({<img src={SCLAM} />},{<img src={SCLAM} />})
                 </p>
               </div>
             </Grid>
@@ -104,9 +104,9 @@ function Migrate() {
                 <Grid container spacing={2}>
                   <Grid item xs={12} sm={4} md={4} lg={4}>
                     <div className="stake-apy">
-                      <p className="single-stake-subtitle">Old CLAM Supply</p>
+                      <p className="single-stake-subtitle">Old BBB Supply</p>
                       <Box component="p" color="text.secondary" className="single-stake-subtitle-value">
-                        {oldClamTotalSupply ? trim(oldClamTotalSupply, 0) : <Skeleton width="150px" />}
+                        {oldBBBTotalSupply ? trim(oldBBBTotalSupply, 0) : <Skeleton width="150px" />}
                       </Box>
                     </div>
                   </Grid>
@@ -144,7 +144,7 @@ function Migrate() {
                       <p>Connect Wallet</p>
                     </Box>
                   </div>
-                  <p className="desc-text">Connect your wallet to migrate your CLAM tokens!</p>
+                  <p className="desc-text">Connect your wallet to migrate your BBB tokens!</p>
                 </div>
               ) : (
                 <div className="migrate-table">
@@ -158,7 +158,7 @@ function Migrate() {
                     <div className="step">1</div>
                     <div className="data-row-name data-row-expand">Claim warmup</div>
                     <div className="data-row-value data-row-expand">
-                      {isAppLoading ? <Skeleton width="80px" /> : <>{trim(Number(oldWarmupBalance), 4)} sCLAM</>}
+                      {isAppLoading ? <Skeleton width="80px" /> : <>{trim(Number(oldWarmupBalance), 4)} sBBB</>}
                     </div>
                     <div className="data-row-action">
                       {Number(oldWarmupBalance) === 0 && <Box className="migrate-done">DONE</Box>}
@@ -179,14 +179,14 @@ function Migrate() {
 
                   <div className="data-row">
                     <div className="step">2</div>
-                    <div className="data-row-name data-row-expand">Unstake CLAM</div>
+                    <div className="data-row-name data-row-expand">Unstake BBB</div>
                     <div className="data-row-value data-row-expand">
-                      {isAppLoading ? <Skeleton width="80px" /> : <>{trim(Number(oldSClamBalance), 4)} sCLAM</>}
+                      {isAppLoading ? <Skeleton width="80px" /> : <>{trim(Number(oldSBBBBalance), 4)} sBBB</>}
                     </div>
                     <div className="data-row-action">
-                      {+oldSClamBalance === 0 && <Box className="migrate-done">DONE</Box>}
-                      {+oldSClamBalance > 0 &&
-                        (sCLAMAllowance > 0 ? (
+                      {+oldSBBBBalance === 0 && <Box className="migrate-done">DONE</Box>}
+                      {+oldSBBBBalance > 0 &&
+                        (sBBBAllowance > 0 ? (
                           <Box
                             className="migrate-btn"
                             bgcolor="bibimbap.bibimbapBrown"
@@ -195,7 +195,7 @@ function Migrate() {
                               onUnstake();
                             }}
                           >
-                            <p>{txnButtonText(pendingTransactions, 'unstaking', 'Unstake CLAM')}</p>
+                            <p>{txnButtonText(pendingTransactions, 'unstaking', 'Unstake BBB')}</p>
                           </Box>
                         ) : (
                           <Box
@@ -215,20 +215,18 @@ function Migrate() {
                   <div className="data-row">
                     <div className="step">3</div>
                     <div className="data-row-name data-row-expand">
-                      <div>Migrate CLAM to CLAM2</div>
-                      <div className="estimated-clam2">Estimated CLAM2 </div>
+                      <div>Migrate BBB to BBB2</div>
+                      <div className="estimated-BBB2">Estimated BBB2 </div>
                     </div>
                     <div className="data-row-value data-row-expand">
-                      <div>
-                        {isAppLoading ? <Skeleton width="80px" /> : <>{trim(Number(oldClamBalance), 4)} CLAM</>}
-                      </div>
-                      <div className="estimated-clam2">
-                        {isAppLoading ? <Skeleton width="80px" /> : <>{trim(Number(oldClamBalance) / 5, 4)} CLAM2</>}
+                      <div>{isAppLoading ? <Skeleton width="80px" /> : <>{trim(Number(oldBBBBalance), 4)} BBB</>}</div>
+                      <div className="estimated-BBB2">
+                        {isAppLoading ? <Skeleton width="80px" /> : <>{trim(Number(oldBBBBalance) / 5, 4)} BBB2</>}
                       </div>
                     </div>
                     <div className="data-row-action">
-                      {+oldClamBalance > 0 &&
-                        (clamAllowance >= +oldClamBalance ? (
+                      {+oldBBBBalance > 0 &&
+                        (BBBAllowance >= +oldBBBBalance ? (
                           <Box
                             className="migrate-btn"
                             bgcolor="bibimbap.bibimbapBrown"
@@ -256,10 +254,10 @@ function Migrate() {
 
                   <Box className="data-row" bgcolor="mode.lightGray100">
                     <div />
-                    <p className="data-row-name data-row-expand">Your CLAM2 Balance</p>
+                    <p className="data-row-name data-row-expand">Your BBB2 Balance</p>
                     <p />
                     <p className="data-row-value data-row-action">
-                      {isAppLoading ? <Skeleton width="80px" /> : <>{trim(Number(clamBalance), 4)} CLAM2</>}
+                      {isAppLoading ? <Skeleton width="80px" /> : <>{trim(Number(BBBBalance), 4)} BBB2</>}
                     </p>
                   </Box>
                 </div>

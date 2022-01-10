@@ -99,7 +99,7 @@ export const Web3ContextProvider: React.FC<{ children: ReactElement }> = ({ chil
       Number(otherChainID) !== Networks.POLYGON_MUMBAI &&
       Number(otherChainID) !== Networks.HARDHAT
     ) {
-      alert('Please switch your wallet to Polygon network to use OtterClam!');
+      alert('Please switch your wallet to Polygon network to use Bibimbap Finance!');
     }
 
     if (chainID !== otherChainID) {

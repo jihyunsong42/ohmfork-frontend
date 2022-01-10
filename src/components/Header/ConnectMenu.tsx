@@ -65,11 +65,11 @@ function ConnectMenu() {
         onClick={clickFunc}
       >
         <p>{buttonText}</p>
-        {pendingTransactions.length > 0 && (
+        {/* {pendingTransactions.length > 0 && (
           <Slide direction="left" in={isHovering} {...{ timeout: 333 }}>
             <SvgIcon className="caret-down" component={CaretDownIcon} htmlColor={primaryColor} />
           </Slide>
-        )}
+        )} */}
       </Box>
 
       <Popper id={id} open={open} anchorEl={anchorEl} placement="bottom-end">

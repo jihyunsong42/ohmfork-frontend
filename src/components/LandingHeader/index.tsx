@@ -40,6 +40,8 @@ export default function LandingHeader() {
       <Link href={DiscordLink}>Discord</Link>
       {/* <Link href={GithubLink}>Github</Link> */}
       <Link href={MediumLink}>Medium</Link>
+      <Link onClick={e => window.alert('We are preparing this page at the moment! Please wait!')}>Whitepaper</Link>
+      <Link onClick={e => window.alert('We are preparing this page at the moment! Please wait!')}>Bibimpaper</Link>
       {/* <Link href={DocsLink}>Docs</Link> */}
       {/* <div className="landing-header-nav-wrap">
         <Box

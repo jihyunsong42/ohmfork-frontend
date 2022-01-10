@@ -1,6 +1,6 @@
 import { ethers } from 'ethers';
 import { getAddresses } from '../../constants';
-import { StakingHelperContract, ClamTokenContract, StakedClamContract, StakingContract } from '../../abi';
+import { StakingHelperContract, BBBTokenContract, StakedBBBContract, StakingContract } from '../../abi';
 import { clearPendingTxn, fetchPendingTxns, getStakingTypeText } from './pending-txns-slice';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { fetchAccountSuccess, getBalances } from './account-slice';
@@ -23,21 +23,21 @@ export const changeApproval = createAsyncThunk(
     const addresses = getAddresses(networkID);
 
     const signer = provider.getSigner();
-    const clamContract = new ethers.Contract(addresses.BBB_ADDRESS, ClamTokenContract, signer);
-    const sCLAMContract = new ethers.Contract(addresses.sBBB_ADDRESS, StakedClamContract, signer);
+    const BBBContract = new ethers.Contract(addresses.BBB_ADDRESS, BBBTokenContract, signer);
+    const sBBBContract = new ethers.Contract(addresses.sBBB_ADDRESS, StakedBBBContract, signer);
 
     let approveTx;
     try {
-      if (token === 'CLAM') {
-        approveTx = await clamContract.approve(addresses.STAKING_HELPER_ADDRESS, ethers.constants.MaxUint256);
+      if (token === 'BBB') {
+        approveTx = await BBBContract.approve(addresses.STAKING_HELPER_ADDRESS, ethers.constants.MaxUint256);
       }
 
-      if (token === 'sCLAM') {
-        approveTx = await sCLAMContract.approve(addresses.STAKING_ADDRESS, ethers.constants.MaxUint256);
+      if (token === 'sBBB') {
+        approveTx = await sBBBContract.approve(addresses.STAKING_ADDRESS, ethers.constants.MaxUint256);
       }
 
-      const text = 'Approve ' + (token === 'CLAM' ? 'Staking' : 'Unstaking');
-      const pendingTxnType = token === 'CLAM' ? 'approve_staking' : 'approve_unstaking';
+      const text = 'Approve ' + (token === 'BBB' ? 'Staking' : 'Unstaking');
+      const pendingTxnType = token === 'BBB' ? 'approve_staking' : 'approve_unstaking';
 
       dispatch(fetchPendingTxns({ txnHash: approveTx.hash, text, type: pendingTxnType }));
 
@@ -51,14 +51,14 @@ export const changeApproval = createAsyncThunk(
       }
     }
 
-    const stakeAllowance = await clamContract.allowance(address, addresses.STAKING_HELPER_ADDRESS);
-    const unstakeAllowance = await sCLAMContract.allowance(address, addresses.STAKING_ADDRESS);
+    const stakeAllowance = await BBBContract.allowance(address, addresses.STAKING_HELPER_ADDRESS);
+    const unstakeAllowance = await sBBBContract.allowance(address, addresses.STAKING_ADDRESS);
 
     return dispatch(
       fetchAccountSuccess({
         staking: {
-          clamStake: +stakeAllowance,
-          sCLAMUnstake: +unstakeAllowance,
+          BBBStake: +stakeAllowance,
+          sBBBUnstake: +unstakeAllowance,
         },
       }),
     );

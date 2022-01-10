@@ -152,7 +152,7 @@ function BondPurchase({ bondKey, slippage }: IBondPurchaseProps) {
     await dispatch(changeApproval({ bondKey, provider, networkID: chainID, address }));
   };
 
-  const bondUnit = bond.autostake ? 'sCLAM' : 'CLAM';
+  const bondUnit = bond.autostake ? 'sBBB' : 'BBB';
 
   return (
     <Box display="flex" flexDirection="column">
@@ -206,8 +206,8 @@ function BondPurchase({ bondKey, slippage }: IBondPurchaseProps) {
         bond.autostake && (
           <div className="help-text">
             <p className="help-text-desc">
-              Note: The (4, 4) bond will stake all CLAMs at the start, so you will earn all rebase rewards during the
-              vesting term. Once fully vested, you will only be able to claim sClam.
+              Note: The (4, 4) bond will stake all BBBs at the start, so you will earn all rebase rewards during the
+              vesting term. Once fully vested, you will only be able to claim sBBB.
             </p>
           </div>
         )

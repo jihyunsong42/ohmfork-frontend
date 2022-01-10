@@ -3,7 +3,7 @@ import { createAsyncThunk, createSelector, createSlice } from '@reduxjs/toolkit'
 import { ethers } from 'ethers';
 import _ from 'lodash';
 import { contractForReserve } from 'src/helpers';
-import { ClamTokenContract, ClamTokenMigrator, StakedClamContract, StakingContract } from '../../abi';
+import { BBBTokenContract, BBBTokenMigrator, StakedBBBContract, StakingContract } from '../../abi';
 import { getAddresses } from '../../constants';
 import { fetchAccountSuccess } from './account-slice';
 import { loadAppDetails } from './app-slice';
@@ -24,13 +24,13 @@ const initialState: IState = {
 };
 
 export interface MigrationState extends IState {
-  oldClam: string;
-  oldSClam: string;
+  oldBBB: string;
+  oldsBBB: string;
   oldWarmup: string;
   canClaimWarmup: boolean;
-  clamAllowance: number;
-  sCLAMAllowance: number;
-  oldClamTotalSupply: number;
+  BBBAllowance: number;
+  sBBBAllowance: number;
+  oldBBBTotalSupply: number;
   oldTreasuryBalance: number;
   migrateProgress: number;
 }
@@ -45,38 +45,39 @@ export const loadMigrationDetails = createAsyncThunk(
   'migration/loadMigrationDetails',
   async ({ networkID, provider, address }: LoadMigrationActionPayload): Promise<MigrationState> => {
     const addresses = getAddresses(networkID);
-    const oldClamContract = new ethers.Contract(addresses.OLD_CLAM_ADDRESS, ClamTokenContract, provider);
-    const oldSClamContract = new ethers.Contract(addresses.OLD_SCLAM_ADDRESS, StakedClamContract, provider);
+    const oldBBBContract = new ethers.Contract(addresses.OLD_BBB_ADDRESS, BBBTokenContract, provider);
+    const oldSBBBContract = new ethers.Contract(addresses.OLD_SBBB_ADDRESS, StakedBBBContract, provider);
     const oldStakingContract = new ethers.Contract(addresses.OLD_STAKING_ADDRESS, StakingContract, provider);
     const stakingContract = new ethers.Contract(addresses.STAKING_ADDRESS, StakingContract, provider);
-    const migrator = new ethers.Contract(addresses.MIGRATOR, ClamTokenMigrator, provider);
+    const migrator = new ethers.Contract(addresses.MIGRATOR, BBBTokenMigrator, provider);
     const mai = contractForReserve('mai', networkID, provider);
 
-    const [oldClamBalance, oldSClamBalance, oldWarmup, oldSClamAllowance, clamMigratorAllowance, epoch] =
-      await Promise.all([
-        oldClamContract.balanceOf(address),
-        oldSClamContract.balanceOf(address),
+    const [oldBBBBalance, oldSBBBBalance, oldWarmup, oldSBBBAllowance, BBBMigratorAllowance, epoch] = await Promise.all(
+      [
+        oldBBBContract.balanceOf(address),
+        oldSBBBContract.balanceOf(address),
         oldStakingContract.warmupInfo(address),
-        oldSClamContract.allowance(address, addresses.OLD_STAKING_ADDRESS),
-        oldClamContract.allowance(address, addresses.MIGRATOR),
+        oldSBBBContract.allowance(address, addresses.OLD_STAKING_ADDRESS),
+        oldBBBContract.allowance(address, addresses.MIGRATOR),
         stakingContract.epoch(),
-      ]);
-    const oldClamTotalSupply = (await oldClamContract.totalSupply()) / 1e9;
+      ],
+    );
+    const oldBBBTotalSupply = (await oldBBBContract.totalSupply()) / 1e9;
     const oldTreasuryBalance = (await mai.balanceOf(addresses.OLD_TREASURY)) / 1e18;
     const oldTotalSupply = (await migrator.oldSupply()) / 1e9;
-    const migrateProgress = 1 - oldClamTotalSupply / oldTotalSupply;
+    const migrateProgress = 1 - oldBBBTotalSupply / oldTotalSupply;
 
     const oldGons = oldWarmup[1];
-    const oldWarmupBalance = await oldSClamContract.balanceForGons(oldGons);
+    const oldWarmupBalance = await oldSBBBContract.balanceForGons(oldGons);
 
     return {
-      oldClam: ethers.utils.formatUnits(oldClamBalance, 9),
-      oldSClam: ethers.utils.formatUnits(oldSClamBalance, 9),
+      oldBBB: ethers.utils.formatUnits(oldBBBBalance, 9),
+      oldsBBB: ethers.utils.formatUnits(oldSBBBBalance, 9),
       oldWarmup: ethers.utils.formatUnits(oldWarmupBalance, 9),
       canClaimWarmup: oldWarmup[0].gt(0) && epoch[1].gte(oldWarmup[2]),
-      sCLAMAllowance: +oldSClamAllowance,
-      clamAllowance: +clamMigratorAllowance,
-      oldClamTotalSupply,
+      sBBBAllowance: +oldSBBBAllowance,
+      BBBAllowance: +BBBMigratorAllowance,
+      oldBBBTotalSupply,
       oldTreasuryBalance,
       migrateProgress,
     };
@@ -92,11 +93,11 @@ export const approveUnstaking = createAsyncThunk(
     }
     const addresses = getAddresses(networkID);
     const signer = provider.getSigner();
-    const sCLAMContract = new ethers.Contract(addresses.OLD_SCLAM_ADDRESS, StakedClamContract, signer);
+    const sBBBContract = new ethers.Contract(addresses.OLD_SBBB_ADDRESS, StakedBBBContract, signer);
 
     let approveTx;
     try {
-      approveTx = await sCLAMContract.approve(addresses.OLD_STAKING_ADDRESS, ethers.constants.MaxUint256);
+      approveTx = await sBBBContract.approve(addresses.OLD_STAKING_ADDRESS, ethers.constants.MaxUint256);
 
       const text = 'Approve Unstaking';
       const pendingTxnType = 'approve_unstaking';
@@ -113,12 +114,12 @@ export const approveUnstaking = createAsyncThunk(
       }
     }
 
-    const sCLAMAllowance = await sCLAMContract.allowance(address, addresses.OLD_STAKING_ADDRESS);
+    const sBBBAllowance = await sBBBContract.allowance(address, addresses.OLD_STAKING_ADDRESS);
 
     return dispatch(
       fetchAccountSuccess({
         migration: {
-          sCLAMAllowance: +sCLAMAllowance,
+          sBBBAllowance: +sBBBAllowance,
         },
       }),
     );
@@ -135,11 +136,11 @@ export const approveMigration = createAsyncThunk(
     const addresses = getAddresses(networkID);
 
     const signer = provider.getSigner();
-    const clamContract = new ethers.Contract(addresses.OLD_CLAM_ADDRESS, ClamTokenContract, signer);
+    const BBBContract = new ethers.Contract(addresses.OLD_BBB_ADDRESS, BBBTokenContract, signer);
 
     let approveTx;
     try {
-      approveTx = await clamContract.approve(addresses.MIGRATOR, ethers.constants.MaxUint256);
+      approveTx = await BBBContract.approve(addresses.MIGRATOR, ethers.constants.MaxUint256);
 
       const text = 'Approve Migration';
       const pendingTxnType = 'approve_migration';
@@ -156,12 +157,12 @@ export const approveMigration = createAsyncThunk(
       }
     }
 
-    const clamAllowance = await clamContract.allowance(address, addresses.MIGRATOR);
+    const BBBAllowance = await BBBContract.allowance(address, addresses.MIGRATOR);
 
     return dispatch(
       fetchAccountSuccess({
         migration: {
-          clamAllowance: +clamAllowance,
+          BBBAllowance: +BBBAllowance,
         },
       }),
     );
@@ -183,7 +184,7 @@ export const migrate = createAsyncThunk(
     }
     const addresses = getAddresses(networkID);
     const signer = provider.getSigner();
-    const migrator = new ethers.Contract(addresses.MIGRATOR, ClamTokenMigrator, signer);
+    const migrator = new ethers.Contract(addresses.MIGRATOR, BBBTokenMigrator, signer);
 
     let tx;
     try {

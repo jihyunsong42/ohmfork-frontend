@@ -89,7 +89,7 @@ function Bond({ bondKey }: IBondProps) {
                     </Box>
                   </div>
                   <div className="bond-price-data">
-                    <p className="bond-price-data-title">CLAM Price</p>
+                    <p className="bond-price-data-title">BBB Price</p>
                     <Box component="p" color="text.secondary" className="bond-price-data-value">
                       {isBondLoading ? <Skeleton /> : `$${trim(marketPrice, 2)}`}
                     </Box>

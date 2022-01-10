@@ -1,10 +1,12 @@
 import { Link } from '@material-ui/core';
-import { DiscordLink, DocsLink, GithubLink, TwitterLink } from 'src/constants';
+import { DiscordLink, TwitterLink, TelegramLink, MediumLink } from 'src/constants';
 import styles from './footer.module.scss';
 import TwitterIcon from '../../images/twitter.svg';
 import DiscordIcon from '../../images/icon_discord.svg';
+import MediumIcon from '../../images/icon_medium.svg';
 import GithubIcon from '../../images/icon_github.svg';
 import DocIcon from '../../images/icon_doc.svg';
+import TelegramIcon from '../../images/icon_telegram.svg';
 import HeaderLogo from 'src/assets/images/header-logo.png';
 import PolygonLogo from './polygon-logo.png';
 import XIcon from './x-icon.svg';
@@ -36,10 +38,10 @@ export default function Footer({ backgroundColor }: Props) {
       <div className={styles.buttonList}>
         <LinkButton name="Twitter" href={TwitterLink} image={TwitterIcon} />
         <LinkButton name="Discord" href={DiscordLink} image={DiscordIcon} />
-        {/* <LinkButton name="Github" href={GithubLink} image={GithubIcon} /> */}
-        {/* <LinkButton name="Docs" href={DocsLink} image={DocIcon} /> */}
+        <LinkButton name="Medium" href={MediumLink} image={MediumIcon} />
+        <LinkButton name="Telegram" href={TelegramLink} image={TelegramIcon} />
       </div>
-      <p className={styles.makeit}>WAGMI with (비빔,비빔)</p>
+      {/* <p className={styles.makeit}>WAGMI with (비빔,비빔)</p>
       <div className={styles.logos}>
         <img src={HeaderLogo} alt="logo" />
         <img src={XIcon} alt="x" style={{ width: 20, height: 20 }} />

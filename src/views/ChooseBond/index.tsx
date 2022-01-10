@@ -68,7 +68,7 @@ function ChooseBond() {
 
             <Grid item xs={6} className={`ohm-price`}>
               <Box textAlign={`${isVerySmallScreen ? 'right' : 'center'}`}>
-                <p className="bond-hero-title">CLAM Price</p>
+                <p className="bond-hero-title">BBB Price</p>
                 <Box component="p" color="text.secondary" className="bond-hero-value">
                   {isAppLoading ? <Skeleton width="100px" /> : `$${trim(marketPrice, 2)}`}
                 </Box>
