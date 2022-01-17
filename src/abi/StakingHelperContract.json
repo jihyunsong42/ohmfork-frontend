@@ -9,7 +9,7 @@
         },
         {
           "internalType": "address",
-          "name": "_CLAM",
+          "name": "_BBB",
           "type": "address"
         }
       ],
@@ -18,7 +18,7 @@
     },
     {
       "inputs": [],
-      "name": "CLAM",
+      "name": "BBB",
       "outputs": [
         {
           "internalType": "address",

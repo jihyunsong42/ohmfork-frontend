@@ -73,15 +73,15 @@
     width: 540px;
 
     @media (max-width: $breakpoint-lg) {
-      width: 432px;
+      width: 300px;
     }
 
     @media (max-width: $breakpoint-md) {
-      width: 378px;
+      width: 260px;
     }
 
     @media (max-width: $breakpoint-sm) {
-      width: 324px;
+      width: 220px;
     }
   }
 }

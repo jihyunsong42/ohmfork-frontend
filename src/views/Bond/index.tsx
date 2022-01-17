@@ -25,7 +25,6 @@ interface IBondProps {
 }
 
 function Bond({ bondKey }: IBondProps) {
-  console.log(bondKey);
   const { provider, address, chainID } = useWeb3Context();
 
   const [slippage, setSlippage] = useState(0.5);

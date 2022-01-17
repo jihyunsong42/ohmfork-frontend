@@ -13,7 +13,7 @@
     },
     {
       "inputs": [],
-      "name": "CLAM",
+      "name": "BBB",
       "outputs": [
         {
           "internalType": "address",
@@ -26,7 +26,7 @@
     },
     {
       "inputs": [],
-      "name": "CLAMCirculatingSupply",
+      "name": "bbbCirculatingSupply",
       "outputs": [
         {
           "internalType": "uint256",
@@ -39,7 +39,7 @@
     },
     {
       "inputs": [],
-      "name": "getNonCirculatingCLAM",
+      "name": "getNonCirculatingBBB",
       "outputs": [
         {
           "internalType": "uint256",
@@ -54,7 +54,7 @@
       "inputs": [
         {
           "internalType": "address",
-          "name": "_clam",
+          "name": "_bbb",
           "type": "address"
         }
       ],
@@ -90,7 +90,7 @@
           "type": "uint256"
         }
       ],
-      "name": "nonCirculatingCLAMAddresses",
+      "name": "nonCirculatingBBBAddresses",
       "outputs": [
         {
           "internalType": "address",
@@ -122,7 +122,7 @@
           "type": "address[]"
         }
       ],
-      "name": "setNonCirculatingCLAMAddresses",
+      "name": "setNonCirculatingBBBAddresses",
       "outputs": [
         {
           "internalType": "bool",

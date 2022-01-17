@@ -4,18 +4,28 @@
       "inputs": [
         {
           "internalType": "address",
-          "name": "_Time",
+          "name": "_BBB",
           "type": "address"
         },
         {
           "internalType": "address",
-          "name": "_MIM",
+          "name": "_DAI",
           "type": "address"
         },
         {
-          "internalType": "uint32",
-          "name": "_secondsNeededForQueue",
-          "type": "uint32"
+          "internalType": "address",
+          "name": "_BBBDAI",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "_bondCalculator",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_blocksNeededForQueue",
+          "type": "uint256"
         }
       ],
       "stateMutability": "nonpayable",
@@ -26,7 +36,7 @@
       "inputs": [
         {
           "indexed": true,
-          "internalType": "enum TimeTreasury.MANAGING",
+          "internalType": "enum BibimbapTreasury.MANAGING",
           "name": "managing",
           "type": "uint8"
         },
@@ -51,7 +61,7 @@
       "inputs": [
         {
           "indexed": true,
-          "internalType": "enum TimeTreasury.MANAGING",
+          "internalType": "enum BibimbapTreasury.MANAGING",
           "name": "managing",
           "type": "uint8"
         },
@@ -286,6 +296,19 @@
       "type": "event"
     },
     {
+      "inputs": [],
+      "name": "BBB",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
       "inputs": [
         {
           "internalType": "address",
@@ -296,9 +319,9 @@
       "name": "LiquidityDepositorQueue",
       "outputs": [
         {
-          "internalType": "uint32",
+          "internalType": "uint256",
           "name": "",
-          "type": "uint32"
+          "type": "uint256"
         }
       ],
       "stateMutability": "view",
@@ -315,9 +338,9 @@
       "name": "LiquidityManagerQueue",
       "outputs": [
         {
-          "internalType": "uint32",
+          "internalType": "uint256",
           "name": "",
-          "type": "uint32"
+          "type": "uint256"
         }
       ],
       "stateMutability": "view",
@@ -334,22 +357,9 @@
       "name": "LiquidityTokenQueue",
       "outputs": [
         {
-          "internalType": "uint32",
+          "internalType": "uint256",
           "name": "",
-          "type": "uint32"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [],
-      "name": "MEMOries",
-      "outputs": [
-        {
-          "internalType": "address",
-          "name": "",
-          "type": "address"
+          "type": "uint256"
         }
       ],
       "stateMutability": "view",
@@ -366,22 +376,9 @@
       "name": "ReserveManagerQueue",
       "outputs": [
         {
-          "internalType": "uint32",
+          "internalType": "uint256",
           "name": "",
-          "type": "uint32"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [],
-      "name": "Time",
-      "outputs": [
-        {
-          "internalType": "address",
-          "name": "",
-          "type": "address"
+          "type": "uint256"
         }
       ],
       "stateMutability": "view",
@@ -392,6 +389,19 @@
       "name": "auditReserves",
       "outputs": [],
       "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "blocksNeededForQueue",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
       "type": "function"
     },
     {
@@ -443,9 +453,9 @@
       "name": "debtorQueue",
       "outputs": [
         {
-          "internalType": "uint32",
+          "internalType": "uint256",
           "name": "",
-          "type": "uint32"
+          "type": "uint256"
         }
       ],
       "stateMutability": "view",
@@ -777,19 +787,6 @@
       "type": "function"
     },
     {
-      "inputs": [],
-      "name": "manager",
-      "outputs": [
-        {
-          "internalType": "address",
-          "name": "",
-          "type": "address"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
       "inputs": [
         {
           "internalType": "address",
@@ -805,6 +802,19 @@
       "name": "mintRewards",
       "outputs": [],
       "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "owner",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
       "type": "function"
     },
     {
@@ -830,7 +840,7 @@
     {
       "inputs": [
         {
-          "internalType": "enum TimeTreasury.MANAGING",
+          "internalType": "enum BibimbapTreasury.MANAGING",
           "name": "_managing",
           "type": "uint8"
         },
@@ -866,7 +876,7 @@
           "type": "uint256"
         }
       ],
-      "name": "repayDebtWithOHM",
+      "name": "repayDebtWithBBB",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
@@ -900,9 +910,9 @@
       "name": "reserveDepositorQueue",
       "outputs": [
         {
-          "internalType": "uint32",
+          "internalType": "uint256",
           "name": "",
-          "type": "uint32"
+          "type": "uint256"
         }
       ],
       "stateMutability": "view",
@@ -957,9 +967,9 @@
       "name": "reserveSpenderQueue",
       "outputs": [
         {
-          "internalType": "uint32",
+          "internalType": "uint256",
           "name": "",
-          "type": "uint32"
+          "type": "uint256"
         }
       ],
       "stateMutability": "view",
@@ -995,9 +1005,9 @@
       "name": "reserveTokenQueue",
       "outputs": [
         {
-          "internalType": "uint32",
+          "internalType": "uint256",
           "name": "",
-          "type": "uint32"
+          "type": "uint256"
         }
       ],
       "stateMutability": "view",
@@ -1033,9 +1043,9 @@
       "name": "rewardManagerQueue",
       "outputs": [
         {
-          "internalType": "uint32",
+          "internalType": "uint256",
           "name": "",
-          "type": "uint32"
+          "type": "uint256"
         }
       ],
       "stateMutability": "view",
@@ -1062,7 +1072,20 @@
     },
     {
       "inputs": [],
-      "name": "sOHMQueue",
+      "name": "sBBB",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "sBBBQueue",
       "outputs": [
         {
           "internalType": "uint256",
@@ -1074,22 +1097,9 @@
       "type": "function"
     },
     {
-      "inputs": [],
-      "name": "secondsNeededForQueue",
-      "outputs": [
-        {
-          "internalType": "uint32",
-          "name": "",
-          "type": "uint32"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
       "inputs": [
         {
-          "internalType": "enum TimeTreasury.MANAGING",
+          "internalType": "enum BibimbapTreasury.MANAGING",
           "name": "_managing",
           "type": "uint8"
         },
@@ -1154,7 +1164,7 @@
           "type": "uint256"
         }
       ],
-      "name": "valueOf",
+      "name": "valueOfToken",
       "outputs": [
         {
           "internalType": "uint256",

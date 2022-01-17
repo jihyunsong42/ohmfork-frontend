@@ -1,13 +1,10 @@
 {
-  "_format": "hh-sol-artifact-1",
-  "contractName": "OtterClamIDO",
-  "sourceName": "contracts/presale/OtterClamIDO.sol",
   "abi": [
     {
       "inputs": [
         {
           "internalType": "address",
-          "name": "_CLAM",
+          "name": "_BBB",
           "type": "address"
         },
         {
@@ -27,7 +24,7 @@
         },
         {
           "internalType": "address",
-          "name": "_maiClamLP",
+          "name": "_maiBBBLP",
           "type": "address"
         }
       ],
@@ -74,7 +71,7 @@
     },
     {
       "inputs": [],
-      "name": "CLAM",
+      "name": "BBB",
       "outputs": [
         {
           "internalType": "address",
@@ -119,7 +116,7 @@
           "type": "address"
         }
       ],
-      "name": "boughtCLAM",
+      "name": "boughtBBB",
       "outputs": [
         {
           "internalType": "bool",
@@ -290,7 +287,7 @@
     },
     {
       "inputs": [],
-      "name": "maiClamLP",
+      "name": "maiBBBLP",
       "outputs": [
         {
           "internalType": "address",
@@ -342,7 +339,7 @@
           "type": "uint256"
         }
       ],
-      "name": "purchaseCLAM",
+      "name": "purchaseBBB",
       "outputs": [
         {
           "internalType": "bool",

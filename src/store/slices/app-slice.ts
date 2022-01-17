@@ -5,7 +5,6 @@ import {
   BondingCalcContract,
   BBBCirculatingSupply,
   BBBTokenContract,
-  BBBTokenMigrator,
   StakedBBBContract,
   StakingContract,
 } from '../../abi';
@@ -81,7 +80,7 @@ export const loadAppDetails = createAsyncThunk(
     const treasuryRiskFreeValue = reserveAmount + rfvLPValue;
 
     const stakingBalance = await stakingContract.contractBalance();
-    const circSupply = (await bbbCirculatingSupply.CLAMCirculatingSupply()) / 1e9;
+    const circSupply = (await bbbCirculatingSupply.bbbCirculatingSupply()) / 1e9;
     const totalSupply = (await BBBContract.totalSupply()) / 1e9;
     const epoch = await stakingContract.epoch();
     const stakingReward = epoch.distribute / 1e9;

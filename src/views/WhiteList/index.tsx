@@ -5,7 +5,7 @@ import { checkIDOWhiteList } from '../../store/slices/whitelist-slice';
 import { IReduxState } from '../../store/slices/state.interface';
 import { Button, Link } from '@material-ui/core';
 import styles from './whitelist.module.scss';
-import OtterReviewing from './images/otter_reviewing_paper.png';
+import BibimReviewing from './images/bibim_reviewing_paper.png';
 import OtterHappy from './images/otter_happy.png';
 import OtterUpset from './images/otter_upset.png';
 import { DiscordLink, TwitterLink, MediumLink, GithubLink } from '../../constants';
@@ -36,7 +36,7 @@ export default function WhiteList() {
     <div className={styles.body}>
       <div className={styles.cover}>
         {isChecking ? (
-          <img src={OtterReviewing} />
+          <img src={BibimReviewing} />
         ) : whitelisted ? (
           <img src={OtterHappy} style={{ width: 240, height: 240 }} />
         ) : (

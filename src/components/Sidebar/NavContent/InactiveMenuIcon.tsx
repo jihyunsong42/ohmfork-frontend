@@ -1,6 +1,6 @@
 import { SVGProps, useContext } from 'react';
 import { AppThemeContext } from 'src/helpers/app-theme-context';
-import logo from './IhwamoonClosed.png';
+import logo from './bbbclose.png';
 
 function InactiveMenuIcon(props: SVGProps<SVGSVGElement> & { color?: string }) {
   const currentTheme = useContext(AppThemeContext);

@@ -6,18 +6,22 @@ import { Backdrop, Button, Link, Paper } from '@material-ui/core';
 import Shell from './shell.png';
 import SecondSection from './components/SecondSection';
 import Footer from './components/Footer';
-import { DiscordLink, GithubLink, TwitterLink, MediumLink, TelegramLink } from 'src/constants';
+import { DiscordLink, DocsLink, GithubLink, TwitterLink, MediumLink, TelegramLink } from 'src/constants';
 import TwitterIcon from './images/twitter.svg';
 import DiscordIcon from './images/icon_discord.svg';
 import MediumIcon from './images/icon_medium.svg';
 import TelegramIcon from './images/icon_telegram.svg';
+import DocsIcon from './images/icon_doc.svg';
 import GithubIcon from './images/icon_github.svg';
 import Bibim01 from './images/bibim_01.png';
 import CloseIcon from './images/icon_24x24_close.svg';
 import Countdown from './components/Countdown';
 import WhiteList from '../WhiteList';
+import Roadmap from './images/roadmap.png';
+import { useTranslation } from 'react-i18next';
 
 function Landing() {
+  const { t, i18n } = useTranslation();
   const [open, setOpen] = useState(true);
 
   return (
@@ -37,22 +41,22 @@ function Landing() {
         <div className="landing__first-section__body">
           <div className="landing__first-section__body__left">
             <div className="landing__first-section__body__title">
-              <p>Decentralized</p>
-              <p>Meme Finance 2.0</p>
+              <p>{t('landing.description.part1')}</p>
+              <p>{t('landing.description.part2')}</p>
             </div>
             <div className="landing__first-section__body__subtitle">
-              <p>Stake your tasty Bibimbap</p>
+              <p>{t('landing.description.tagline')}</p>
             </div>
-            {/* <a className="landing__first-section__body__app-button" href="https://app.otterclam.finance">
+            {/* <a className="landing__first-section__body__app-button" href="https://app.bibimbap.finance">
               <Button variant="contained" color="primary" size="medium" disableElevation>
                 Enter APP
               </Button>
             </a> */}
-            <div className="landing__first-section__body__app-button">
-              {/* <Button variant="contained" color="primary" size="medium" disabled>
+            {/* <div className="landing__first-section__body__app-button">
+              <Button variant="contained" color="primary" size="medium" disabled>
                 Coming Soon...
-              </Button> */}
-            </div>
+              </Button>
+            </div> */}
             <div className="community-icons">
               <Link href={TwitterLink} className="community-icon-link">
                 <img src={TwitterIcon} />
@@ -65,6 +69,9 @@ function Landing() {
               </Link>
               <Link href={TelegramLink} className="community-icon-link">
                 <img src={TelegramIcon} />
+              </Link>
+              <Link href={DocsLink} className="community-icon-link">
+                <img src={DocsIcon} />
               </Link>
               {/* <Link href={GithubLink} className="community-icon-link">
                 <img src={GithubIcon} />
@@ -82,6 +89,9 @@ function Landing() {
       {/* <h1>Coming Soon...</h1> */}
       {/* <Stat /> */}
       <SecondSection />
+      <div className="roadmapBox">
+        <img className="roadmap" src={Roadmap} />
+      </div>
       <Footer />
       {/* <Backdrop open={open} className="whitelist-check">
         <div className="whitelist-container">

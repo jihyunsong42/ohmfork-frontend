@@ -1,18 +1,15 @@
 {
-  "_format": "hh-sol-artifact-1",
-  "contractName": "OtterBondStakeDepository",
-  "sourceName": "contracts/OtterBondStakeDepository.sol",
   "abi": [
     {
       "inputs": [
         {
           "internalType": "address",
-          "name": "_CLAM",
+          "name": "_BBB",
           "type": "address"
         },
         {
           "internalType": "address",
-          "name": "_sCLAM",
+          "name": "_sBBB",
           "type": "address"
         },
         {
@@ -191,7 +188,7 @@
     },
     {
       "inputs": [],
-      "name": "CLAM",
+      "name": "BBB",
       "outputs": [
         {
           "internalType": "address",
@@ -631,7 +628,7 @@
     },
     {
       "inputs": [],
-      "name": "sCLAM",
+      "name": "sBBB",
       "outputs": [
         {
           "internalType": "address",
@@ -673,7 +670,7 @@
     {
       "inputs": [
         {
-          "internalType": "enum OtterBondStakeDepository.PARAMETER",
+          "internalType": "enum BibimbapBondStakeDepository.PARAMETER",
           "name": "_parameter",
           "type": "uint8"
         },

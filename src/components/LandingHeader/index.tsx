@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react';
 import './header.scss';
 import { Link } from '@material-ui/core';
 import HeaderLogo from './header-logo.png';
-import { DiscordLink, TwitterLink, MediumLink } from 'src/constants';
+import { DiscordLink, TwitterLink, MediumLink, DocsLink } from 'src/constants';
+import LanguagePicker from '../LanguagePicker';
 
 export default function LandingHeader() {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -40,9 +41,9 @@ export default function LandingHeader() {
       <Link href={DiscordLink}>Discord</Link>
       {/* <Link href={GithubLink}>Github</Link> */}
       <Link href={MediumLink}>Medium</Link>
-      <Link onClick={e => window.alert('We are preparing this page at the moment! Please wait!')}>Whitepaper</Link>
+      <Link href={DocsLink}>Docs</Link>
       <Link onClick={e => window.alert('We are preparing this page at the moment! Please wait!')}>Bibimpaper</Link>
-      {/* <Link href={DocsLink}>Docs</Link> */}
+      <LanguagePicker border={false} />
       {/* <div className="landing-header-nav-wrap">
         <Box
           component="div"

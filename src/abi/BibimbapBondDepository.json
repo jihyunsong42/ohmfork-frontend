@@ -4,7 +4,7 @@
       "inputs": [
         {
           "internalType": "address",
-          "name": "_CLAM",
+          "name": "_BBB",
           "type": "address"
         },
         {
@@ -183,7 +183,7 @@
     },
     {
       "inputs": [],
-      "name": "CLAM",
+      "name": "BBB",
       "outputs": [
         {
           "internalType": "address",
@@ -647,7 +647,7 @@
     {
       "inputs": [
         {
-          "internalType": "enum OtterBondDepository.PARAMETER",
+          "internalType": "enum BibimbapBondDepository.PARAMETER",
           "name": "_parameter",
           "type": "uint8"
         },

@@ -203,6 +203,21 @@
   }
 }
 
+.roadmapBox {
+  justify-content: center;
+  text-align: center;
+  padding-bottom: 40px;
+}
+
+.roadmap {
+  width: 70%;
+  @media screen and (max-width: 596px) {
+    text-align: center;
+    justify-content: center;
+    width: 80%;
+  }
+}
+
 .contact-us {
   margin-top: 20px;
   text-decoration: none;

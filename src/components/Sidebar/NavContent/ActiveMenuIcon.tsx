@@ -1,5 +1,5 @@
 import { SVGProps } from 'react';
-import logo from './IhwamoonOpened.png';
+import logo from './bbbopen.png';
 
 function ActiveMenuIcon(props: SVGProps<SVGSVGElement>) {
   return (

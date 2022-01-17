@@ -2,6 +2,6 @@
   "svg.preview.background": "transparent",
   "editor.formatOnSave": true,
   "appService.zipIgnorePattern": ["node_modules{,/**}", ".vscode{,/**}"],
-  "appService.defaultWebAppToDeploy": "/subscriptions/d8a09126-fb63-4366-9349-bfbb2076aafc/resourceGroups/BibimbapFinance/providers/Microsoft.Web/sites/Bibimbap",
-  "appService.deploySubpath": "build"
+  "appService.deploySubpath": "build",
+  "appService.defaultWebAppToDeploy": "/subscriptions/d8a09126-fb63-4366-9349-bfbb2076aafc/resourceGroups/BibimbapFinance/providers/Microsoft.Web/sites/Bibimbap"
 }

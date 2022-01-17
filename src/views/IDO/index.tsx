@@ -120,7 +120,6 @@ export default function IDO() {
   const staking = new ethers.Contract(addresses.STAKING_ADDRESS, StakingContract, provider);
 
   const loadDetails = useCallback(async () => {
-    console.log('connected: ' + connected);
     setLoading(true);
     const idoMAIAmount = ethers.utils.formatEther(await mai.balanceOf(ido.address));
     let walletMAIBalance = connected ? await mai.balanceOf(wallet) : BigNumber.from(0);
@@ -182,8 +181,7 @@ export default function IDO() {
     dispatch({ type: 'purchasing' });
     try {
       // window.alert(Number(ethers.utils.parseUnits(amount, 'gwei')));
-      const tx = await ido.connect(provider.getSigner()).purchaseCLAM(ethers.utils.parseEther(amount));
-      console.log(tx);
+      const tx = await ido.connect(provider.getSigner()).purchaseBBB(ethers.utils.parseEther(amount));
       await tx.wait(1);
       loadDetails();
     } catch (error) {
@@ -198,7 +196,7 @@ export default function IDO() {
     dispatch({ type: 'purchasing' });
     try {
       const tx = await ido.connect(provider.getSigner()).claim(wallet);
-      await tx.wait(3);
+      await tx.wait(1);
       loadDetails();
     } catch (error) {
       console.error(error);
@@ -269,7 +267,7 @@ export default function IDO() {
             <div className={styles.tokenAmounts}>
               <p className={styles.tokenAmount}>
                 {Intl.NumberFormat('en').format(Number(state.stakingAmount || 0))}
-                <span className={styles.tokenTitle}>BBBM</span>
+                <span className={styles.tokenTitle}>BBB</span>
               </p>
             </div>
           </div>
@@ -293,7 +291,7 @@ export default function IDO() {
           </div>
         )}
         <div className={styles.claimButton}>
-          <a style={{ textDecoration: 'none' }} href="https://app.otterclam.finance">
+          <a style={{ textDecoration: 'none' }} href="https://app.bibimbap.finance">
             <Button variant="contained" color="primary" size="medium" disableElevation>
               Enter app
             </Button>
@@ -408,7 +406,7 @@ export default function IDO() {
               </div>
               // <div className={styles.soldOutContainer}>
               //   <p className={styles.soldOut}>Sold Out!</p>
-              //   <a style={{ textDecoration: 'none' }} href="https://app.otterclam.finance">
+              //   <a style={{ textDecoration: 'none' }} href="https://app.bibimbap.finance">
               //     <Button variant="contained" color="primary" size="large" disableElevation>
               //       Open App
               //     </Button>

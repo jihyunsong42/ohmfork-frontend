@@ -4,7 +4,7 @@ export const TwitterLink = 'https://twitter.com/bibimbapfinance';
 
 export const TelegramLink = 'https://t.me/+EOXGPGDM6n5kYjNi';
 
-export const DocsLink = 'https://docs.otterclam.finance';
+export const DocsLink = 'https://docs.bibimbap.finance';
 
 export const GithubLink = 'https://github.com/OtterClam';
 

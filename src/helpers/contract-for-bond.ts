@@ -1,6 +1,6 @@
 import { ethers } from 'ethers';
 import { BondKey, getBond } from '../constants';
-import { OtterBond, OtterBondStake } from '../abi';
+import { BibimbapBond, BibimbapBondStake } from '../abi';
 
 export const contractForBond = (
   bond: BondKey,
@@ -8,5 +8,5 @@ export const contractForBond = (
   provider: ethers.Signer | ethers.providers.Provider,
 ): ethers.Contract => {
   const { address, autostake } = getBond(bond, networkID);
-  return new ethers.Contract(address, autostake ? OtterBondStake : OtterBond, provider);
+  return new ethers.Contract(address, autostake ? BibimbapBondStake : BibimbapBond, provider);
 };
