@@ -72,7 +72,7 @@ function BondRedeem({ bondKey }: IBondRedeem) {
             onRedeem(false);
           }}
         >
-          <p>{txnButtonText(pendingTransactions, 'redeem_bond_' + bondKey, 'Claim')}</p>
+          <p>{txnButtonText(pendingTransactions, 'redeem_bond_' + bondKey, 'Claiim')}</p>
         </Box>
         {!bond.deprecated && !bond.autostake && (
           <Box

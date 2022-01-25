@@ -6,7 +6,7 @@ import { IReduxState } from '../../store/slices/state.interface';
 import { Button, Link } from '@material-ui/core';
 import styles from './whitelist.module.scss';
 import BibimReviewing from './images/bibim_reviewing_paper.png';
-import OtterHappy from './images/otter_happy.png';
+import BibimHappy from './images/bibim_happy.png';
 import OtterUpset from './images/otter_upset.png';
 import { DiscordLink, TwitterLink, MediumLink, GithubLink } from '../../constants';
 import DiscordIcon from './images/icon_discord.svg';
@@ -14,7 +14,7 @@ import TwitterIcon from './images/icon_twitter.svg';
 import MediumIcon from './images/icon_medium.svg';
 import GithubIcon from './images/icon_github.svg';
 import FooterLogo from 'src/components/FooterLogo';
-import OtterModIcon from './images/role_icon_mods.png';
+import BibimSunglasses from './images/bibim_sunglasses.png';
 
 export default function WhiteList() {
   const dispatch = useDispatch();
@@ -35,13 +35,7 @@ export default function WhiteList() {
   return (
     <div className={styles.body}>
       <div className={styles.cover}>
-        {isChecking ? (
-          <img src={BibimReviewing} />
-        ) : whitelisted ? (
-          <img src={OtterHappy} style={{ width: 240, height: 240 }} />
-        ) : (
-          <img src={OtterUpset} />
-        )}
+        {isChecking ? <img src={BibimReviewing} /> : whitelisted ? <img src={BibimHappy} /> : <img src={OtterUpset} />}
       </div>
       {isChecking ? (
         <h1 className={styles.title}>Check your ticket to enter the kingdom</h1>
@@ -49,9 +43,9 @@ export default function WhiteList() {
         <>
           <h2>Welcome to the Kingdom</h2>
           <h1 className={styles.title}>
-            <img src={OtterModIcon} />
+            <img src={BibimSunglasses} />
             <span>You are on the whitelist!</span>
-            <img src={OtterModIcon} />
+            <img src={BibimSunglasses} />
           </h1>
         </>
       ) : (

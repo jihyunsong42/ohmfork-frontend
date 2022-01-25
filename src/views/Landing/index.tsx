@@ -93,14 +93,14 @@ function Landing() {
         <img className="roadmap" src={Roadmap} />
       </div>
       <Footer />
-      {/* <Backdrop open={open} className="whitelist-check">
+      <Backdrop open={open} className="whitelist-check">
         <div className="whitelist-container">
           <WhiteList />
           <div className="close-modal-button" onClick={() => setOpen(false)}>
             <img src={CloseIcon} />
           </div>
         </div>
-      </Backdrop> */}
+      </Backdrop>
     </div>
   );
 }

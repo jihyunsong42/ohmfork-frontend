@@ -1,10 +1,10 @@
 import { getAddresses } from '.';
 
-export type BondKey = 'mai' | 'mai_bbb';
+export type BondKey = 'mai' | 'mai_bbb' | 'frax_44';
 
-export const BondKeys: BondKey[] = ['mai', 'mai_bbb'];
+export const BondKeys: BondKey[] = ['mai', 'mai_bbb', 'frax_44'];
 
-export const ReserveKeys: BondKey[] = ['mai'];
+export const ReserveKeys: BondKey[] = ['mai', 'frax_44'];
 
 export enum BondAction {
   Bond = 'bond',
@@ -28,7 +28,7 @@ type BondMap = {
 };
 
 export function listBonds(chainId: number): BondMap {
-  const { BONDS, RESERVES, MAI_ADDRESS, BBB_ADDRESS } = getAddresses(chainId);
+  const { BONDS, RESERVES, MAI_ADDRESS, BBB_ADDRESS, FRAX_ADDRESS } = getAddresses(chainId);
   return {
     mai: {
       key: 'mai',
@@ -38,7 +38,7 @@ export function listBonds(chainId: number): BondMap {
       reserveUnit: 'MAI',
       type: 'token',
       dexUrl: `https://app.sushi.com/swap?outputCurrency=${MAI_ADDRESS}`,
-      deprecated: false,
+      deprecated: true,
       autostake: false,
     },
     // mai44: {
@@ -60,8 +60,19 @@ export function listBonds(chainId: number): BondMap {
       reserveUnit: 'LP',
       type: 'lp',
       dexUrl: `https://app.sushi.com/add/${MAI_ADDRESS}/${BBB_ADDRESS}`,
-      deprecated: false,
+      deprecated: true,
       autostake: false,
+    },
+    frax_44: {
+      key: 'frax_44',
+      name: 'FRAX (4,4)',
+      address: BONDS.FRAX,
+      reserve: RESERVES.FRAX,
+      reserveUnit: 'FRAX',
+      type: 'token',
+      dexUrl: `https://quickswap.exchange/#/add/${FRAX_ADDRESS}`,
+      deprecated: false,
+      autostake: true,
     },
     // mai_clam44: {
     //   key: 'mai_clam44',
